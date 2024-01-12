@@ -28,8 +28,7 @@ const TrackProductPage = () => {
   const navigate = useNavigate();
   const column = useMemo(() => TRACK_TABLE_MEMO, []);
   const data = useMemo(() => TRACK_TABLE_DATA, []);
-  // const column1 = useMemo(() => TRACK_PRODUCT_TABLE_MEMO, []);
-  // const data1 = useMemo(() => TRACK_PRODUCT_TABLE_DATA, []);
+  cm;
 
   const [isEditFormOpen, setIsEditFormOpen] = useState(false);
 
