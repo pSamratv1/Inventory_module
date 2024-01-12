@@ -1,17 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Badge } from "../../helpers/components/common";
 import { defaultThCss, tableTdCss, tableThCss } from "../constants/table";
-import {
-  TRACK_PRODUCT_TABLE_DATA,
-  TRACK_PRODUCT_TABLE_MEMO,
-} from "helpers/components/common/table/TableConstants";
 
-import TableActions from "helpers/components/common/table/TableActions";
-import Table from "helpers/components/common/table/Table";
-import { useFilters, useSortBy, useTable } from "react-table";
+import TrackInnerTable from "helpers/components/inventory-module/formmethods/view/TrackInnerTable";
 
 export const ROLE_TABLE_MEMO = [
   {
@@ -117,8 +111,7 @@ export const renderItemTableHead = ({
 };
 
 // ViewNavOrganizationle body
-export const RenderItemTableBody = ({ rows, prepareRow, columns }: any) => {
-  console.log(columns, "Columns");
+export const RenderItemTableBody = ({ rows, prepareRow }: any) => {
   const [clickedId, setClickedId] = useState(0);
   const [testId, setTestId] = useState<number[] | any>([]);
   const [isFlag, setIsFlag] = useState(false);
@@ -190,11 +183,7 @@ export const RenderItemTableBody = ({ rows, prepareRow, columns }: any) => {
               })}
             </tr>
             {clickedId === testId[testId.length - 1] && isFlag && (
-              <tr>
-                <td>
-                  <div className="h-20 bg-red-500 w-screen"></div>
-                </td>
-              </tr>
+              <TrackInnerTable />
             )}
           </React.Fragment>
         );

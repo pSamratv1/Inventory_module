@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Table from "../../../common/table/Table";
 import { useFilters, useSortBy, useTable } from "react-table";
 import {
   RenderItemTableBody,
-  renderItemTableBody,
   renderItemTableHead,
 } from "../../../../../utils/methods/itemProps";
 // import { IoChevronDown, IoChevronUp } from "react-icons/io5";

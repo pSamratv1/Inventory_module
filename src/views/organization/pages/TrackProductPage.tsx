@@ -1,19 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useNavigate } from "react-router-dom";
 import { ControlBar } from "../../../helpers/components/common/table/ControlBar";
-import TableActions from "../../../helpers/components/common/table/TableActions";
 import { useAppDispatch } from "../../../helpers/hooks/useStoreHooks";
 import {
   setAddCategoryTrue,
   setAddItemTrue,
   setSupplierAddTrue,
-  setTrackOrderTrue,
-  setTrackProductData,
-  setTrackProductId,
+  // setTrackOrderTrue,
+  // setTrackProductData,
+  // setTrackProductId,
 } from "../../../redux-app/inventory-module/InventorySlice";
 import {
-  TRACK_PRODUCT_TABLE_DATA,
-  TRACK_PRODUCT_TABLE_MEMO,
   TRACK_TABLE_DATA,
   TRACK_TABLE_MEMO,
 } from "../../../helpers/components/common/table/TableConstants";
@@ -21,14 +17,13 @@ import { useMemo, useState } from "react";
 import { addBtnControlbar } from "utils/methods/css";
 import TrackTable from "../../../helpers/components/inventory-module/formmethods/view/TrackTable";
 import { BiChevronDown } from "react-icons/bi";
+import TrackDetailsForm from "helpers/components/inventory-module/formmethods/edit/TrackDetailsForm";
 // import TrackTable from "../../../helpers/components/inventory-module/formmethods/view/TrackTable";
 
 const TrackProductPage = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const column = useMemo(() => TRACK_TABLE_MEMO, []);
   const data = useMemo(() => TRACK_TABLE_DATA, []);
-  cm;
 
   const [isEditFormOpen, setIsEditFormOpen] = useState(false);
 
@@ -89,7 +84,7 @@ const TrackProductPage = () => {
             <TrackTable {...viewItemTableProps} />
           </div>
         </div>
-        {/* {isEditFormOpen && <TrackDetailsForm />} */}
+        {isEditFormOpen && <TrackDetailsForm />}
       </div>
     </>
   );
