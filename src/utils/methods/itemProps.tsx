@@ -183,7 +183,9 @@ export const RenderItemTableBody = ({ rows, prepareRow }: any) => {
               })}
             </tr>
             {clickedId === testId[testId.length - 1] && isFlag && (
-              <TrackInnerTable />
+              <div className=" bg-red-300 w-[63rem] h-30">
+                <TrackInnerTable />
+              </div>
             )}
           </React.Fragment>
         );

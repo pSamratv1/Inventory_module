@@ -2,7 +2,7 @@
 // import { useRef, useState } from "react";
 
 import { useRef } from "react";
-import { useTable, useFilters, useSortBy } from "react-table";
+import { useTable } from "react-table";
 import {
   renderItemTableHead,
   renderItemTableBody,
@@ -33,8 +33,7 @@ export const ReorderTable = (props: ReorderTableProps) => {
   // const [filterInput, setFilterInput] = useState("");
   // Use the state and functions returned from useTable to build your UI
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data }, useFilters, useSortBy);
-
+    useTable({ columns, data });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   // const handleFilterChange = (e: any) => {
   //   const value = e.target.value || undefined;

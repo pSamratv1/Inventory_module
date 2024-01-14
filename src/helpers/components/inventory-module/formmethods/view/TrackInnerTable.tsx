@@ -85,27 +85,27 @@ const TrackInnerTable = () => {
   const data = useMemo(() => TRACK_PRODUCT_TABLE_DATA, []);
   return (
     <table>
-      <thead>
-        <tr>
-          <th>Recieved By</th>
-          <th>Conatct</th>
-          <th>Location</th>
-          <th>Recieved Date</th>
-          <th>Status</th>
-          <th>Actions</th>
+      <thead className="">
+        <tr className="">
+          <th className="p-3 w-[11rem]">Conatct</th>
+          <th className="p-3 w-[11rem]">Recieved By</th>
+          <th className="p-3 w-[11rem]">Recieved Date</th>
+          <th className="p-3 w-[11rem]">Location</th>
+          <th className="p-3 w-[11rem]">Status</th>
+          <th className="p-3 w-[11rem]">Actions</th>
         </tr>
       </thead>
       <tbody>
         {data.map((item) => (
-          <tr key={item.id}>
-            <td>{item.id}</td>
-            <td>{item.contact}</td>
-            <td>{item.location}</td>
-            <td>{item.recieved_date}</td>
-            <td>{item.status}</td>
+          <tr className="" key={item.id}>
+            <td className="p-3 w-[11rem]">{item.id}</td>
+            <td className="p-3 w-[11rem]">{item.contact}</td>
+            <td className="p-3 w-[11rem]">{item.location}</td>
+            <td className="p-3 w-[11rem]">{item.recieved_date}</td>
+            <td className="p-3 w-[11rem]">{item.status}</td>
 
-            <td>
-              <button>View</button>
+            <td className="flex h-[3rem] justify-center items-center gap-4">
+              <button className="px-2 h-7">View</button>
               <button>Edit</button>
               <button>Delete</button>
             </td>

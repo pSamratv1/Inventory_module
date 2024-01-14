@@ -54,7 +54,7 @@ const TrackTable = (props: TrackProductAccordionProps) => {
   };
 
   return (
-    <div className="accordion w-full border border-solid border-gray-50 shadow-lg  rounded-xl ">
+    <div className=" border border-solid border-gray-50 shadow-lg  rounded-xl ">
       <Table {...tableProps} />
     </div>
   );
