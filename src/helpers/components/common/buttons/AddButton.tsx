@@ -4,7 +4,7 @@ import { AiOutlinePlusSquare } from "react-icons/ai";
 
 export default function AddButton(props: ButtonSchema) {
   // Props
-  const { title, handleAction, css } = props;
+  const { title, handleAction, css, icon } = props;
 
   // Props variables
   const { customCss, iconCss } = css!;
@@ -18,7 +18,7 @@ export default function AddButton(props: ButtonSchema) {
 
   return (
     <button {...buttonProps}>
-      <AiOutlinePlusSquare className={iconClass} />
+      {icon ? icon : <AiOutlinePlusSquare className={iconClass} />}
       {title ?? "Add"}
     </button>
   );

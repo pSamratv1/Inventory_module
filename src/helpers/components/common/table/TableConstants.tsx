@@ -28,10 +28,7 @@ export const INVENTORY_TABLE_MEMO = [
         Header: "Purchase Date",
         accessor: "purchase_date",
       },
-      {
-        Header: "Barcode Scan",
-        accessor: "barcode_scan",
-      },
+
       {
         Header: "Actions",
         accessor: "actions",
@@ -63,10 +60,7 @@ export const TRACK_TABLE_MEMO = [
         Header: "Supplier Name",
         accessor: "supplier_name",
       },
-      {
-        Header: "Barcode Scan",
-        accessor: "barcode_scan",
-      },
+
       {
         Header: "Supplied Date",
         accessor: "supplied_date",

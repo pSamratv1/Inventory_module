@@ -16,8 +16,9 @@ import {
 import { useMemo, useState } from "react";
 import { addBtnControlbar } from "utils/methods/css";
 import TrackTable from "../../../helpers/components/inventory-module/formmethods/view/TrackTable";
-import { BiChevronDown } from "react-icons/bi";
+import { BiBarcodeReader, BiChevronDown } from "react-icons/bi";
 import TrackDetailsForm from "helpers/components/inventory-module/formmethods/edit/TrackDetailsForm";
+import BarcodeFileScanner from "helpers/components/common/scanners/BarCodeScanner";
 // import TrackTable from "../../../helpers/components/inventory-module/formmethods/view/TrackTable";
 
 const TrackProductPage = () => {
@@ -26,7 +27,12 @@ const TrackProductPage = () => {
   const data = useMemo(() => TRACK_TABLE_DATA, []);
 
   const [isEditFormOpen, setIsEditFormOpen] = useState(false);
+  const [openCamera, setOpenCamera] = useState(false);
 
+  const handleOpenCamera = () => {
+    alert("Opening camera");
+    setOpenCamera(true);
+  };
   // const getRoutes = (item: any) => ({
   //   handleViewAction: () => {
   //     navigate(`/profile/view/${item.id}`);
@@ -55,7 +61,6 @@ const TrackProductPage = () => {
       title: "Add Category",
       handleAction: () => dispatch(setAddCategoryTrue(true)),
     },
-
     addItemBtnControlbar: {
       css: { customCss: addBtnControlbar },
       title: "Add Item",
@@ -65,6 +70,12 @@ const TrackProductPage = () => {
       css: { customCss: addBtnControlbar },
       title: "Add Supplier",
       handleAction: () => dispatch(setSupplierAddTrue(true)),
+    },
+    openCameraControlbar: {
+      css: { customCss: addBtnControlbar },
+      title: "Open Camera",
+      icon: <BiBarcodeReader size={20} />,
+      handleAction: () => handleOpenCamera(),
     },
   };
   return (
@@ -84,6 +95,7 @@ const TrackProductPage = () => {
             <TrackTable {...viewItemTableProps} />
           </div>
         </div>
+        {openCamera && <BarcodeFileScanner />}
         {isEditFormOpen && <TrackDetailsForm />}
       </div>
     </>

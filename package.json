@@ -13,6 +13,7 @@
     "@hookform/resolvers": "^3.3.2",
     "@originjs/vite-plugin-federation": "^1.3.2",
     "@reduxjs/toolkit": "^2.0.1",
+    "@smvrnn/quagga2": "^1.8.2",
     "axios": "^1.6.3",
     "chart.js": "^4.4.1",
     "dayjs": "^1.11.10",

@@ -11,6 +11,7 @@ export const ControlBar = (props: any) => {
     addCategoryBtnControlbar,
     addItemBtnControlbar,
     addSupplierBtnControlbar,
+    openCameraControlbar,
   } = props;
 
   return (
@@ -30,6 +31,11 @@ export const ControlBar = (props: any) => {
         {addSupplierBtnControlbar && (
           <div className="w-[10rem] h-[40px] flex justify-around">
             <AddButton {...addSupplierBtnControlbar} />
+          </div>
+        )}
+        {openCameraControlbar && (
+          <div className="w-[10rem] h-[40px] flex justify-around">
+            <AddButton {...openCameraControlbar} />
           </div>
         )}
       </div>
