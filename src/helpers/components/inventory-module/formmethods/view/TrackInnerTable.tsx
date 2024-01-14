@@ -79,7 +79,7 @@
 
 // export default TrackInnerTable;
 import { TRACK_PRODUCT_TABLE_DATA } from "helpers/components/common/table/TableConstants";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 const TrackInnerTable = () => {
   const data = useMemo(() => TRACK_PRODUCT_TABLE_DATA, []);
