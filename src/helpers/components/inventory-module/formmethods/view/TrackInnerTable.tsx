@@ -84,10 +84,10 @@ import { useMemo } from "react";
 const TrackInnerTable = () => {
   const data = useMemo(() => TRACK_PRODUCT_TABLE_DATA, []);
   return (
-    <table>
+    <table className="border-solid border-2 border-indigo-300">
       <thead className="">
-        <tr className="">
-          <th className="p-3 w-[11rem]">Conatct</th>
+        <tr className="text-[14px] text-slate-400">
+          <th className="p-4 w-[11rem]">Conatct</th>
           <th className="p-3 w-[11rem]">Recieved By</th>
           <th className="p-3 w-[11rem]">Recieved Date</th>
           <th className="p-3 w-[11rem]">Location</th>
@@ -98,16 +98,26 @@ const TrackInnerTable = () => {
       <tbody>
         {data.map((item) => (
           <tr className="" key={item.id}>
-            <td className="p-3 w-[11rem]">{item.id}</td>
-            <td className="p-3 w-[11rem]">{item.contact}</td>
-            <td className="p-3 w-[11rem]">{item.location}</td>
-            <td className="p-3 w-[11rem]">{item.recieved_date}</td>
-            <td className="p-3 w-[11rem]">{item.status}</td>
+            <td className="p-3 w-[11rem] flex flex-row h-[3rem] justify-center items-center gap-2 px-6   ">
+              {item.id}
+            </td>
+            <td className="px-12 py-3 w-[11rem]h-[3rem]">{item.contact}</td>
+            <td className="px-12 py-3 w-[11rem]h-[3rem]">{item.location}</td>
+            <td className="px-12 py-3 w-[11rem]h-[3rem]">
+              {item.recieved_date}
+            </td>
+            <td className="px-12 py-3 w-[11rem]h-[3rem]">{item.status}</td>
 
-            <td className="flex h-[3rem] justify-center items-center gap-4">
-              <button className="px-2 h-7">View</button>
-              <button>Edit</button>
-              <button>Delete</button>
+            <td className="flex h-[3rem] justify-center items-center gap-2 px-6">
+              <button className="px-2 h-7 border-solid border-2 border-indigo-600 text-sm rounded-[5px] hover:bg-indigo-600 hover:text-white">
+                View
+              </button>
+              <button className="px-2 h-7 border-solid border-2 border-indigo-600 text-sm rounded-[5px] hover:bg-indigo-600 hover:text-white">
+                Edit
+              </button>
+              <button className="px-2 h-7 border-solid border-2 border-indigo-600 text-sm rounded-[5px] hover:bg-indigo-600 hover:text-white">
+                Delete
+              </button>
             </td>
           </tr>
         ))}
