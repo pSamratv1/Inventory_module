@@ -132,31 +132,28 @@ export const TRACK_PRODUCT_TABLE_MEMO = [
 // An example of what a design data should look like
 export const TRACK_PRODUCT_TABLE_DATA = [
   {
-    id: "1",
-    item_name: "Salt",
-    recieved_by: "@mir Maharjan",
+    id: 1,
+    recieved_by: "Amir Maharjan",
     contact: "9840012748",
     location: "Harisiddhi",
     recieved_date: "2024-01-14",
     status: "Incomplete",
   },
   {
-    id: "2",
-    item_name: "Salt",
-    recieved_by: "@mir Maharjan",
+    id: 2,
+    recieved_by: "Amir Maharjan",
     contact: "9840012748",
     location: "Harisiddhi",
     recieved_date: "2024-01-14",
-    status: "Complete",
+    status: "Incomplete",
   },
   {
-    id: "3",
-    item_name: "Salt",
-    recieved_by: "@mir Maharjan",
+    id: 3,
+    recieved_by: "Amir Maharjan",
     contact: "9840012748",
     location: "Harisiddhi",
     recieved_date: "2024-01-14",
-    status: "Complete",
+    status: "Incomplete",
   },
 ];
 

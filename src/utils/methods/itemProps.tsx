@@ -183,7 +183,7 @@ export const RenderItemTableBody = ({ rows, prepareRow }: any) => {
               })}
             </tr>
             {clickedId === testId[testId.length - 1] && isFlag && (
-              <div className="flex  bg-slate-200 w-[62rem] h-30 ">
+              <div className="flex  bg-slate-200 w-[62.9rem] h-30  border-solid border-2 border-indigo-300 rounded-xl">
                 <TrackInnerTable />
               </div>
             )}

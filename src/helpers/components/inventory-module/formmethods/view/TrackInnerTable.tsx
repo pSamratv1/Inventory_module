@@ -84,10 +84,10 @@ import { useMemo } from "react";
 const TrackInnerTable = () => {
   const data = useMemo(() => TRACK_PRODUCT_TABLE_DATA, []);
   return (
-    <table className="border-solid border-2 border-indigo-300">
+    <table>
       <thead className="">
         <tr className="text-[14px] text-slate-400">
-          <th className="p-4 w-[11rem]">Conatct</th>
+          <th className="p-3 w-[11rem]">Conatct</th>
           <th className="p-3 w-[11rem]">Recieved By</th>
           <th className="p-3 w-[11rem]">Recieved Date</th>
           <th className="p-3 w-[11rem]">Location</th>
@@ -99,13 +99,14 @@ const TrackInnerTable = () => {
         {data.map((item) => (
           <tr className="" key={item.id}>
             <td className="p-3 w-[11rem] flex flex-row h-[3rem] justify-center items-center gap-2 px-6   ">
-              {item.id}
+              {item.contact}
             </td>
-            <td className="px-12 py-3 w-[11rem]h-[3rem]">{item.contact}</td>
-            <td className="px-12 py-3 w-[11rem]h-[3rem]">{item.location}</td>
+            <td className="px-12 py-3 w-[11rem]h-[3rem]">{item.recieved_by}</td>
+
             <td className="px-12 py-3 w-[11rem]h-[3rem]">
               {item.recieved_date}
             </td>
+            <td className="px-12 py-3 w-[11rem]h-[3rem]">{item.location}</td>
             <td className="px-12 py-3 w-[11rem]h-[3rem]">{item.status}</td>
 
             <td className="flex h-[3rem] justify-center items-center gap-2 px-6">
