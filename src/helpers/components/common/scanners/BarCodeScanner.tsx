@@ -1,59 +1,60 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
-import { BrowserMultiFormatReader, Result } from "@zxing/library";
+import React, { useCallback, useMemo, useRef } from "react";
 import Webcam from "react-webcam";
+import {
+  BarcodeFormat,
+  BrowserMultiFormatReader,
+  DecodeHintType,
+  NotFoundException,
+  Result,
+} from "@zxing/library";
 
-type BarcodeScannerComponentProps = {
-  width: number;
-  height: number;
-  onUpdate: (arg0: unknown, arg1?: Result) => void;
-};
-
-const BarcodeScannerComponent = (props: BarcodeScannerComponentProps) => {
-  const { width, height, onUpdate } = props;
-
-  // useRef for accessing the webcam instance
-  const webcamRef = React.useRef<any>(null);
-
+const CameraComponent: React.FC = () => {
+  const webcamRef = useRef<Webcam>(null);
   // Use useMemo to memoize the codeReader instance
-  const codeReader = React.useMemo(() => new BrowserMultiFormatReader(), []);
+  const codeReader = useMemo(() => new BrowserMultiFormatReader(), []);
 
-  // Callback function to capture the webcam image and decode the barcode
-  const capture = React.useCallback(() => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    if (imageSrc) {
-      codeReader
-        .decodeFromImage(undefined, imageSrc)
-        .then((result) => {
-          onUpdate(null, result);
-        })
-        .catch((err) => {
-          onUpdate(err);
-        });
+  const capture = useCallback(() => {
+    if (webcamRef.current) {
+      const imageSrc = webcamRef.current.getScreenshot();
+      const hints = new Map();
+      hints.set(DecodeHintType.POSSIBLE_FORMATS, [BarcodeFormat.QR_CODE]);
+      if (imageSrc) {
+        codeReader
+          .decodeFromImage(undefined, imageSrc)
+          .then((result: Result) => {
+            // Handle the barcode result here
+            console.log("Barcode Result:", result.getText());
+          })
+          .catch((err) => {
+            if (err instanceof NotFoundException) {
+              console.error("No barcode or QR code found in the image");
+            } else {
+              console.error("Error decoding barcode:", err);
+            }
+          });
+      }
     }
-  }, [codeReader, onUpdate]);
+  }, [codeReader]);
 
-  // useEffect to repeatedly call the capture function at a regular interval
   React.useEffect(() => {
     const intervalId = setInterval(capture, 100);
 
     // Cleanup the interval on component unmount
     return () => clearInterval(intervalId);
   }, [capture]);
-
-  // Explicitly specify the type for screenshotFormat
-  const webcamProps: any = {
-    width: width,
-    height: height,
-    ref: webcamRef,
-    screenshotFormat: "image/png", // Specify the type here
-    videoConstraints: {
-      facingMode: "environment",
-    },
-  };
-
-  // Return a Webcam component with specified props
-  return <Webcam {...webcamProps} />;
+  return (
+    <div>
+      <h2>React Camera Example</h2>
+      <Webcam
+        audio={false}
+        height={500}
+        ref={webcamRef}
+        screenshotFormat="image/jpeg"
+        width={500}
+      />
+    </div>
+  );
 };
 
-export default BarcodeScannerComponent;
+export default CameraComponent;

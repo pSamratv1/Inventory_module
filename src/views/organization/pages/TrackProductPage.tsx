@@ -19,6 +19,7 @@ import TrackTable from "../../../helpers/components/inventory-module/formmethods
 import { BiBarcodeReader, BiChevronDown } from "react-icons/bi";
 import TrackDetailsForm from "helpers/components/inventory-module/formmethods/edit/TrackDetailsForm";
 import BarcodeScannerComponent from "helpers/components/common/scanners/BarCodeScanner";
+import CameraComponent from "helpers/components/common/scanners/BarCodeScanner";
 // import TrackTable from "../../../helpers/components/inventory-module/formmethods/view/TrackTable";
 
 const TrackProductPage = () => {
@@ -86,6 +87,7 @@ const TrackProductPage = () => {
             <ControlBar {...controlbarProps} />
           </div>
         </div>
+        {openCamera && <CameraComponent />}
 
         <div className="flex flex-col gap-4 p-8">
           <div
@@ -95,16 +97,6 @@ const TrackProductPage = () => {
             <TrackTable {...viewItemTableProps} />
           </div>
         </div>
-        {openCamera && (
-          <BarcodeScannerComponent
-            width={500}
-            height={500}
-            onUpdate={(err, result) => {
-              if (result) setBarCodedata(result.getText());
-              else setBarCodedata("Not Found");
-            }}
-          />
-        )}
         {isEditFormOpen && <TrackDetailsForm />}
       </div>
     </>
