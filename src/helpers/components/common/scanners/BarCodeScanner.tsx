@@ -1,88 +1,59 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useRef, useState, useEffect } from "react";
-import Quagga from "@smvrnn/quagga2";
+import React from "react";
+import { BrowserMultiFormatReader, Result } from "@zxing/library";
+import Webcam from "react-webcam";
 
-interface ProductDetails {
-  barcode: string;
-  name: string;
-  // Add more details as needed
-}
-
-const BarcodeFileScanner: React.FC = () => {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [productDetails, setProductDetails] = useState<ProductDetails | null>(
-    null
-  );
-
-  useEffect(() => {
-    if (videoRef.current) {
-      Quagga.init(
-        {
-          inputStream: {
-            name: "Live",
-            type: "LiveStream",
-            target: videoRef.current,
-            constraints: {
-              width: 800,
-              height: 600,
-              facingMode: "environment", // Use the back camera, 'user' for front camera
-            },
-          },
-          decoder: {
-            readers: ["ean_reader"],
-          },
-          locate: true,
-        },
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (err: any) => {
-          if (err) {
-            console.error("Error initializing Quagga:", err);
-          } else {
-            Quagga.start();
-          }
-        }
-      );
-
-      Quagga.onDetected((result: any) => {
-        Quagga.stop();
-        if (result && result.codeResult) {
-          // Fetch product details based on the barcode
-          fetchProductDetails(result.codeResult.code);
-        } else {
-          console.error("Barcode decoding failed.");
-        }
-      });
-
-      return () => {
-        Quagga.stop();
-      };
-    }
-  }, [videoRef]);
-
-  const fetchProductDetails = async (barcode: string) => {
-    // Replace this with your API endpoint or database query to fetch product details
-    try {
-      const response = await fetch(`YOUR_API_ENDPOINT/${barcode}`);
-      const data: ProductDetails = await response.json();
-      setProductDetails(data);
-    } catch (error) {
-      console.error("Error fetching product details:", error);
-    }
-  };
-
-  return (
-    <div>
-      <video ref={videoRef} style={{ width: "100%", maxWidth: "800px" }} />
-      {productDetails && (
-        <div>
-          <h2>Product Details</h2>
-          <p>Barcode: {productDetails.barcode}</p>
-          <p>Name: {productDetails.name}</p>
-          {/* Add more details as needed */}
-        </div>
-      )}
-    </div>
-  );
+type BarcodeScannerComponentProps = {
+  width: number;
+  height: number;
+  onUpdate: (arg0: unknown, arg1?: Result) => void;
 };
 
-export default BarcodeFileScanner;
+const BarcodeScannerComponent = (props: BarcodeScannerComponentProps) => {
+  const { width, height, onUpdate } = props;
+
+  // useRef for accessing the webcam instance
+  const webcamRef = React.useRef<any>(null);
+
+  // Use useMemo to memoize the codeReader instance
+  const codeReader = React.useMemo(() => new BrowserMultiFormatReader(), []);
+
+  // Callback function to capture the webcam image and decode the barcode
+  const capture = React.useCallback(() => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    if (imageSrc) {
+      codeReader
+        .decodeFromImage(undefined, imageSrc)
+        .then((result) => {
+          onUpdate(null, result);
+        })
+        .catch((err) => {
+          onUpdate(err);
+        });
+    }
+  }, [codeReader, onUpdate]);
+
+  // useEffect to repeatedly call the capture function at a regular interval
+  React.useEffect(() => {
+    const intervalId = setInterval(capture, 100);
+
+    // Cleanup the interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [capture]);
+
+  // Explicitly specify the type for screenshotFormat
+  const webcamProps: any = {
+    width: width,
+    height: height,
+    ref: webcamRef,
+    screenshotFormat: "image/png", // Specify the type here
+    videoConstraints: {
+      facingMode: "environment",
+    },
+  };
+
+  // Return a Webcam component with specified props
+  return <Webcam {...webcamProps} />;
+};
+
+export default BarcodeScannerComponent;

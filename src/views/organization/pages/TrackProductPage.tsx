@@ -18,14 +18,14 @@ import { addBtnControlbar } from "utils/methods/css";
 import TrackTable from "../../../helpers/components/inventory-module/formmethods/view/TrackTable";
 import { BiBarcodeReader, BiChevronDown } from "react-icons/bi";
 import TrackDetailsForm from "helpers/components/inventory-module/formmethods/edit/TrackDetailsForm";
-import BarcodeFileScanner from "helpers/components/common/scanners/BarCodeScanner";
+import BarcodeScannerComponent from "helpers/components/common/scanners/BarCodeScanner";
 // import TrackTable from "../../../helpers/components/inventory-module/formmethods/view/TrackTable";
 
 const TrackProductPage = () => {
   const dispatch = useAppDispatch();
   const column = useMemo(() => TRACK_TABLE_MEMO, []);
   const data = useMemo(() => TRACK_TABLE_DATA, []);
-
+  const [barCodedata, setBarCodedata] = useState("Not Found");
   const [isEditFormOpen, setIsEditFormOpen] = useState(false);
   const [openCamera, setOpenCamera] = useState(false);
 
@@ -95,7 +95,16 @@ const TrackProductPage = () => {
             <TrackTable {...viewItemTableProps} />
           </div>
         </div>
-        {openCamera && <BarcodeFileScanner />}
+        {openCamera && (
+          <BarcodeScannerComponent
+            width={500}
+            height={500}
+            onUpdate={(err, result) => {
+              if (result) setBarCodedata(result.getText());
+              else setBarCodedata("Not Found");
+            }}
+          />
+        )}
         {isEditFormOpen && <TrackDetailsForm />}
       </div>
     </>
