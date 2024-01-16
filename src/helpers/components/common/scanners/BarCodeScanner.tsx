@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useCallback, useMemo, useRef } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import {
   BarcodeFormat,
@@ -11,9 +12,11 @@ import {
 
 const CameraComponent: React.FC = () => {
   const webcamRef = useRef<Webcam>(null);
+  const [isFlag, setIsFlag] = useState<boolean>(false);
+  const [decodedValue, setDecodedValue] = useState<Text | string>();
+
   // Use useMemo to memoize the codeReader instance
   const codeReader = useMemo(() => new BrowserMultiFormatReader(), []);
-
   const capture = useCallback(() => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
@@ -24,25 +27,32 @@ const CameraComponent: React.FC = () => {
           .decodeFromImage(undefined, imageSrc)
           .then((result: Result) => {
             // Handle the barcode result here
-            console.log("Barcode Result:", result.getText());
+            const resultedValue: string = result.getText();
+
+            setIsFlag(true);
+            setDecodedValue(resultedValue);
           })
-          .catch((err) => {
-            if (err instanceof NotFoundException) {
-              console.error("No barcode or QR code found in the image");
-            } else {
-              console.error("Error decoding barcode:", err);
-            }
+          .catch((_) => {
+            // if (err instanceof NotFoundException) {
+            //   console.error("No barcode or QR code found in the image");
+            // } else {
+            //   console.error("Error decoding barcode:", err);
+            // }
           });
       }
     }
   }, [codeReader]);
 
   React.useEffect(() => {
-    const intervalId = setInterval(capture, 100);
+    if (!isFlag) {
+      const intervalId = setInterval(capture, 1000);
 
-    // Cleanup the interval on component unmount
-    return () => clearInterval(intervalId);
-  }, [capture]);
+      // Cleanup the interval on component unmount
+      return () => clearInterval(intervalId);
+    }
+  }, [capture, isFlag]);
+  console.log(decodedValue, "webcamRefwebcamRefwebcamRef");
+
   return (
     <div>
       <h2>React Camera Example</h2>
