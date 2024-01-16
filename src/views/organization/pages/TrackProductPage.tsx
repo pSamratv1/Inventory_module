@@ -4,6 +4,7 @@ import { useAppDispatch } from "../../../helpers/hooks/useStoreHooks";
 import {
   setAddCategoryTrue,
   setAddItemTrue,
+  setScannerCameraOpen,
   setSupplierAddTrue,
   // setTrackOrderTrue,
   // setTrackProductData,
@@ -18,7 +19,7 @@ import { addBtnControlbar } from "utils/methods/css";
 import TrackTable from "../../../helpers/components/inventory-module/formmethods/view/TrackTable";
 import { BiBarcodeReader, BiChevronDown } from "react-icons/bi";
 import TrackDetailsForm from "helpers/components/inventory-module/formmethods/edit/TrackDetailsForm";
-import BarcodeScannerComponent from "helpers/components/common/scanners/BarCodeScanner";
+
 import CameraComponent from "helpers/components/common/scanners/BarCodeScanner";
 // import TrackTable from "../../../helpers/components/inventory-module/formmethods/view/TrackTable";
 
@@ -26,13 +27,13 @@ const TrackProductPage = () => {
   const dispatch = useAppDispatch();
   const column = useMemo(() => TRACK_TABLE_MEMO, []);
   const data = useMemo(() => TRACK_TABLE_DATA, []);
-  const [barCodedata, setBarCodedata] = useState("Not Found");
+
   const [isEditFormOpen, setIsEditFormOpen] = useState(false);
   const [openCamera, setOpenCamera] = useState(false);
 
   const handleOpenCamera = () => {
-    alert("Opening camera");
     setOpenCamera(true);
+    dispatch(setScannerCameraOpen(true));
   };
   // const getRoutes = (item: any) => ({
   //   handleViewAction: () => {

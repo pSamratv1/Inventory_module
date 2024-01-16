@@ -186,6 +186,10 @@ export const initialState: ItemSliceSchema = {
         details: [],
       },
     },
+    scanner: {
+      isFlag: false,
+      qr_value: "",
+    },
   },
   inventory: {
     item: InitialServiceData,
@@ -362,6 +366,13 @@ export const InventorySlice = createSlice({
     setSupplierAddTrue: (state, action) => {
       state.inventory.supplier.add.isFlag = action.payload;
     },
+    // Scanner
+    setScannerCameraOpen: (state, action) => {
+      state.platform.scanner.isFlag = action.payload;
+    },
+    setScannerValue: (state, action) => {
+      state.platform.scanner.qr_value = action.payload;
+    },
   },
 
   // extra Reducers
@@ -494,5 +505,9 @@ export const {
 
   // Supplier
   setSupplierAddTrue,
+
+  // Scanner
+  setScannerCameraOpen,
+  setScannerValue,
 } = InventorySlice.actions;
 export default InventorySlice.reducer;

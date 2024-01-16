@@ -6,17 +6,36 @@ import {
   BarcodeFormat,
   BrowserMultiFormatReader,
   DecodeHintType,
-  NotFoundException,
   Result,
 } from "@zxing/library";
+import {
+  setAddItemTrue,
+  setScannerCameraOpen,
+} from "redux-app/inventory-module/InventorySlice";
+import { CenterSection, CloseIconButton } from "..";
+import { useAppDispatch, useAppSelector } from "helpers/hooks/useStoreHooks";
+import { RootState } from "redux-app/store";
+import { useNavigate } from "react-router";
 
 const CameraComponent: React.FC = () => {
+  // useRef
   const webcamRef = useRef<Webcam>(null);
-  const [isFlag, setIsFlag] = useState<boolean>(false);
+
+  // Hooks
+  const dispatch = useAppDispatch();
+  const naviate = useNavigate();
+
+  // Redux State and Custom State
+  const [isFlagTrue, setIsFlagTrue] = useState<boolean>(false);
   const [decodedValue, setDecodedValue] = useState<Text | string>();
+  const { isFlag } = useAppSelector(
+    (state: RootState) => state.Inventory.platform.scanner
+  );
 
   // Use useMemo to memoize the codeReader instance
   const codeReader = useMemo(() => new BrowserMultiFormatReader(), []);
+
+  // CallBack funcion
   const capture = useCallback(() => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
@@ -28,9 +47,11 @@ const CameraComponent: React.FC = () => {
           .then((result: Result) => {
             // Handle the barcode result here
             const resultedValue: string = result.getText();
-
-            setIsFlag(true);
+            console.log(resultedValue, "resultedValue");
+            setIsFlagTrue(true);
             setDecodedValue(resultedValue);
+            naviate("/item/1");
+            dispatch(setAddItemTrue(true));
           })
           .catch((_) => {
             // if (err instanceof NotFoundException) {
@@ -44,26 +65,44 @@ const CameraComponent: React.FC = () => {
   }, [codeReader]);
 
   React.useEffect(() => {
-    if (!isFlag) {
+    if (!isFlagTrue) {
       const intervalId = setInterval(capture, 1000);
 
       // Cleanup the interval on component unmount
       return () => clearInterval(intervalId);
     }
-  }, [capture, isFlag]);
-  console.log(decodedValue, "webcamRefwebcamRefwebcamRef");
+  }, [capture, isFlagTrue]);
 
   return (
-    <div>
-      <h2>React Camera Example</h2>
-      <Webcam
-        audio={false}
-        height={500}
-        ref={webcamRef}
-        screenshotFormat="image/jpeg"
-        width={500}
-      />
-    </div>
+    <>
+      {isFlag && (
+        <CenterSection
+          css={{
+            customCss:
+              "z-[108] absolute flex top-0 left-0 w-full h-full items-center bg-black/10 ",
+          }}
+        >
+          <div className="z-[101] w-[calc(50vw+10rem)] sm:min-w-[350px] sm:max-w-[600px] h-[calc(100vh-12rem)] pb-1 bg-white text-xs rounded-md px-6 py-8 ">
+            <p className="text-base text-primary-medium font-medium text-blue mb-2">
+              Scan QR Code
+            </p>
+            <Webcam
+              audio={false}
+              height={400}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              width={600}
+            />
+          </div>
+          <CloseIconButton
+            css={{}}
+            handleAction={() => {
+              dispatch(setScannerCameraOpen(false));
+            }}
+          />
+        </CenterSection>
+      )}
+    </>
   );
 };
 

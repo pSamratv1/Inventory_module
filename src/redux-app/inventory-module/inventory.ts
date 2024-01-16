@@ -117,6 +117,11 @@ export type SupplierPlatform = {
   _edit_SupplierForm: SupplierPlatformSchema;
   _delete_SupplierForm: SupplierPlatformSchema;
 };
+
+export type ScannerPlatform = {
+  isFlag: boolean;
+  qr_value: string;
+};
 export type ItemSliceSchema = {
   platform: {
     item: ItemPlatform;
@@ -124,6 +129,7 @@ export type ItemSliceSchema = {
     reorder: ReorderPlatform;
     track: TrackPlatform;
     supplier: SupplierPlatform;
+    scanner: ScannerPlatform;
   };
 
   inventory: InventoryApi;
