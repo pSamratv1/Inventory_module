@@ -73,7 +73,6 @@ const EditItemForm = () => {
   };
   // Fetch items from the response details (using redux / api)
   const editDataArray = fetchItems(id);
-  console.log(editDataArray[0], "editDataArray");
   // Getting the default value from the editDataArray
   const itemName = editDataArray.length > 0 ? editDataArray[0].item_name : "";
   const itemCategory =

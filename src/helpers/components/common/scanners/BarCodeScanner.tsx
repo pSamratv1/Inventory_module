@@ -6,6 +6,7 @@ import {
   BarcodeFormat,
   BrowserMultiFormatReader,
   DecodeHintType,
+  NotFoundException,
   Result,
 } from "@zxing/library";
 import {
@@ -47,18 +48,18 @@ const CameraComponent: React.FC = () => {
           .then((result: Result) => {
             // Handle the barcode result here
             const resultedValue: string = result.getText();
-            console.log(resultedValue, "resultedValue");
+            console.log(resultedValue);
             setIsFlagTrue(true);
             setDecodedValue(resultedValue);
             naviate("/item/1");
             dispatch(setAddItemTrue(true));
           })
-          .catch((_) => {
-            // if (err instanceof NotFoundException) {
-            //   console.error("No barcode or QR code found in the image");
-            // } else {
-            //   console.error("Error decoding barcode:", err);
-            // }
+          .catch((err: any) => {
+            if (err instanceof NotFoundException) {
+              console.error("No barcode or QR code found in the image");
+            } else {
+              console.error("Error decoding barcode:", err);
+            }
           });
       }
     }

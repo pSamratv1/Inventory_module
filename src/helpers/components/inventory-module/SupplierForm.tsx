@@ -45,7 +45,6 @@ const SupplierForm = () => {
 
   const onSubmit = (data: FormData) => {
     // Ensure item_date is defined and has purchase_date and expiry_date properties
-    console.log(data, "formData Data");
     // Extract purchase_date and expiry_date from data
 
     // Combine restData with date
@@ -60,7 +59,6 @@ const SupplierForm = () => {
     dispatch(AddSupplierThunk(supplierData));
 
     // Now, updatedData contains the original data excluding
-    // console.log(updatedData, "updatedData");
     reset();
   };
   // Redux variables

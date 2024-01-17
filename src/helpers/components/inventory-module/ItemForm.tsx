@@ -14,7 +14,6 @@ const ItemForm = ({ formObj, form }: any) => {
 
   // Redux variables
 
-  console.log(formObj.item_name.common.defaultValue, "formObj");
   // Validation
   // Hooks
   // Methods

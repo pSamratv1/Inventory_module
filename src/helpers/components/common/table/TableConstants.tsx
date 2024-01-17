@@ -159,6 +159,10 @@ export const REORDER_PRODUCT_TABLE_MEMO = [
     hideHeader: false,
     columns: [
       {
+        Header: "Id",
+        accessor: "id",
+      },
+      {
         Header: "Item Name",
         accessor: "item_name",
       },
@@ -167,16 +171,16 @@ export const REORDER_PRODUCT_TABLE_MEMO = [
         accessor: "reorder_quantity",
       },
       {
-        Header: "Reorder Date",
+        Header: "Expiry Reminder",
         accessor: "expiry_reminder",
       },
       {
-        Header: "Supplier Name",
+        Header: "Supplier",
         accessor: "supplier",
       },
       {
         Header: "Action",
-        accessor: "actions",
+        accessor: "action",
       },
     ],
   },

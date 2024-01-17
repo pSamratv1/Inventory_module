@@ -50,7 +50,6 @@ const TrackDetailsForm = () => {
   const { isFlag } = useAppSelector(
     (state: RootState) => state.Inventory.inventory.track.edit
   );
-  console.log(details, "Inside te trackdetails form");
 
   // Fetch items from the response details (using redux / api)
 
@@ -81,9 +80,7 @@ const TrackDetailsForm = () => {
     status,
   } = itemDetails || {};
 
-  console.log(item_name, "Inside the track details form");
   const onSubmit = async (data: TrackFormData) => {
-    console.log(data);
     // const data = getValues();
     // // Extract purchase_date and expiry_date from data
     // const {

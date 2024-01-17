@@ -82,23 +82,16 @@ export const renderItemTableHead = ({
         return (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column: any) => {
+              console.log(column);
               const isId = column.Header.toLowerCase() === "id";
               return column.hideHeader === false ? null : (
                 <th
                   {...column.getHeaderProps(column.getSortByToggleProps())}
-                  // className={`${
-                  //   column.isSorted
-                  //     ? column.isSortedDesc
-                  //       ? "sort-desc p-7"
-                  //       : "sort-asc p-7"
-                  //     : tableThCss
-                  // } ${defaultThCss}`}
                   className={`${
                     isId ? tableThCss(true) : tableThCss(false)
                   } ${defaultThCss}`}
                   onClick={() => handleHeaderClick(column)}
                 >
-                  {/* {isId ? "ID" : column.render("Header")} */}
                   {column.render("Header")}
                 </th>
               );
@@ -110,6 +103,43 @@ export const renderItemTableHead = ({
   );
 };
 
+// ViewNavReorder header
+export const RenderItemTableHead = ({
+  headerGroups,
+  handleHeaderClick,
+}: any) => {
+  return (
+    <>
+      {headerGroups.map((headerGroup: any) => {
+        return (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map((column: any) => {
+              const { getSortByToggleProps } = column;
+              return column.hideHeader === false ? null : (
+                <th
+                  {...column.getHeaderProps(getSortByToggleProps)}
+                  className={`${
+                    column.isSorted
+                      ? column.isSortedDesc
+                        ? "sort-desc py-7"
+                        : "sort-asc py-7"
+                      : tableThCss
+                  } ${defaultThCss}`}
+                  // className={`${
+                  //   isId ? tableThCss(false) : tableThCss(true)
+                  // } ${defaultThCss}`}
+                  onClick={() => handleHeaderClick(column)}
+                >
+                  {column.render("Header")}
+                </th>
+              );
+            })}
+          </tr>
+        );
+      })}
+    </>
+  );
+};
 // ViewNavOrganizationle body
 export const RenderItemTableBody = ({ rows, prepareRow }: any) => {
   const [clickedId, setClickedId] = useState(0);
@@ -183,7 +213,7 @@ export const RenderItemTableBody = ({ rows, prepareRow }: any) => {
               })}
             </tr>
             {clickedId === testId[testId.length - 1] && isFlag && (
-              <div className="flex  bg-slate-200 w-[62.9rem] h-30  border-solid border-2 border-indigo-300 rounded-xl">
+              <div className="flex ml-7 my-2 bg-slate-200 w-[62.9rem] h-30  border-solid border-2 border-indigo-300 rounded-lg">
                 <TrackInnerTable />
               </div>
             )}

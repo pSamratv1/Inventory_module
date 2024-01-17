@@ -1,15 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import { useRef, useState } from "react";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useTable } from "react-table";
 import {
-  renderItemTableHead,
   renderItemTableBody,
+  RenderItemTableHead,
 } from "../../../../../utils/methods/itemProps";
 import { ControlBar } from "../../../common/table/ControlBar";
 import Pagination from "../../../common/table/Pagination";
 import Table from "../../../common/table/Table";
+import CameraComponent from "helpers/components/common/scanners/BarCodeScanner";
+import { BiBarcodeReader } from "react-icons/bi";
+import {
+  setAddCategoryTrue,
+  setAddItemTrue,
+  setScannerCameraOpen,
+  setSupplierAddTrue,
+} from "redux-app/inventory-module/InventorySlice";
+import { addBtnControlbar } from "utils/methods/css";
+import { useAppDispatch } from "helpers/hooks/useStoreHooks";
 
 interface Column {
   Header: string;
@@ -26,27 +36,40 @@ export const ReorderTable = (props: ReorderTableProps) => {
   const { columns, data } = props;
 
   // Redux
+  const dispatch = useAppDispatch();
+
   // Ref
   const currentTable = useRef<HTMLTableElement | null>(null);
 
   // States
+  const [openCamera, setOpenCamera] = useState(false);
+
   // const [filterInput, setFilterInput] = useState("");
   // Use the state and functions returned from useTable to build your UI
+
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data });
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    useTable({
+      columns,
+      data,
+    });
+
   // const handleFilterChange = (e: any) => {
   //   const value = e.target.value || undefined;
   //   setFilter("show.name", value);
   //   setFilterInput(value);
   // };
 
-  // Actions
+  // Actions;
   const handleHeaderClick = (column: any) => {
     alert(column.Header);
   };
 
-  // Handle page count
+  const handleOpenCamera = () => {
+    setOpenCamera(true);
+    dispatch(setScannerCameraOpen(true));
+  };
+
+  // // Handle page count
   const handlePageClick = () => {};
 
   // Table props
@@ -54,7 +77,7 @@ export const ReorderTable = (props: ReorderTableProps) => {
     currentTable,
     getTableProps,
     getTableBodyProps,
-    renderHead: renderItemTableHead({
+    renderHead: RenderItemTableHead({
       headerGroups,
       handleHeaderClick,
     }),
@@ -70,10 +93,36 @@ export const ReorderTable = (props: ReorderTableProps) => {
     css: {},
   };
 
+  const controlbarProps = {
+    addCategoryBtnControlbar: {
+      css: { customCss: addBtnControlbar },
+      title: "Add Category",
+      handleAction: () => dispatch(setAddCategoryTrue(true)),
+    },
+
+    addItemBtnControlbar: {
+      css: { customCss: addBtnControlbar },
+      title: "Add Item",
+      handleAction: () => dispatch(setAddItemTrue(true)),
+    },
+    addSupplierBtnControlbar: {
+      css: { customCss: addBtnControlbar },
+      title: "Add Supplier",
+      handleAction: () => dispatch(setSupplierAddTrue(true)),
+    },
+    openCameraControlbar: {
+      css: { customCss: addBtnControlbar },
+      title: "Open Camera",
+      icon: <BiBarcodeReader size={20} />,
+      handleAction: () => handleOpenCamera(),
+    },
+  };
+
   // Render the UI for your table
   return (
     <div className="w-full h-full flex flex-col text-[13px] font-medium gap-2">
-      <ControlBar />
+      <ControlBar {...controlbarProps} />
+      {openCamera && <CameraComponent />}
       <Table {...tableProps} />
       <Pagination {...paginateProps} />
     </div>

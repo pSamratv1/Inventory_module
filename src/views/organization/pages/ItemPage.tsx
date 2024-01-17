@@ -25,13 +25,13 @@ import AddSupplierDetails from "helpers/components/inventory-module/formmethods/
 
 const ItemPage = () => {
   const dispatch = useAppDispatch();
-
   const { details } = useAppSelector(
     (state: RootState) => state.Inventory.inventory.item.view.response
   );
   const data = details?.items?.length ? details?.items : [];
 
   // Hooks
+
   // Fetch data when the component mounts
 
   const columns = useMemo(() => INVENTORY_TABLE_MEMO, []);

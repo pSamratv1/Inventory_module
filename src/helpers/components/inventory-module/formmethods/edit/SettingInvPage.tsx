@@ -48,7 +48,6 @@ const SettingInvPage = () => {
       low_stock_reminder: min_reorder_quantity,
     };
     // Move reset() to the end
-    console.log(updatedData, "updatedDta");
     try {
       // Dispatch the asynchronous action to update the data via API
       await dispatch(AddReOrderThunk({ updatedData, id }));

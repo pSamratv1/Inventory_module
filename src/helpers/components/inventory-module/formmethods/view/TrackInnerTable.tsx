@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // /* eslint-disable @typescript-eslint/no-explicit-any */
 // import Table from "helpers/components/common/table/Table";
 // import TableActions from "helpers/components/common/table/TableActions";
@@ -78,13 +79,42 @@
 // });
 
 // export default TrackInnerTable;
+import TableActions from "helpers/components/common/table/TableActions";
 import { TRACK_PRODUCT_TABLE_DATA } from "helpers/components/common/table/TableConstants";
+import { useAppDispatch } from "helpers/hooks/useStoreHooks";
 import { useMemo } from "react";
+import {
+  setReorderId,
+  setReorderAddTrue,
+  setEditItemId,
+  setEditItemTrue,
+  setItemDeleteTrue,
+  setDeleteItemId,
+} from "redux-app/inventory-module/InventorySlice";
 
 const TrackInnerTable = () => {
+  const dispatch = useAppDispatch();
   const data = useMemo(() => TRACK_PRODUCT_TABLE_DATA, []);
+  const getRoutes = (id: number) => ({
+    handleViewAction: () => {
+      dispatch(setReorderId(id));
+      dispatch(setReorderAddTrue(true));
+    },
+    handleEditAction: () => {
+      dispatch(setEditItemId(id));
+      dispatch(setEditItemTrue(true));
+    },
+    handleDeleteAction: () => {
+      dispatch(setItemDeleteTrue(true));
+      dispatch(setDeleteItemId(id));
+    },
+  });
+  const datas = data?.map((item: any) => ({
+    ...item,
+    actions: <TableActions {...getRoutes(item.id)} />,
+  }));
   return (
-    <table>
+    <table className="">
       <thead className="">
         <tr className="text-[14px] text-slate-400">
           <th className="p-3 w-[11rem]">Conatct</th>
@@ -96,29 +126,27 @@ const TrackInnerTable = () => {
         </tr>
       </thead>
       <tbody>
-        {data.map((item) => (
+        {datas.map((item) => (
           <tr className="" key={item.id}>
-            <td className="p-3 w-[11rem] flex flex-row h-[3rem] justify-center items-center gap-2 px-6   ">
+            <td className="p-3 w-[11rem] flex flex-row h-[4rem] justify-center items-center gap-2 px-6  text-[13px] ">
               {item.contact}
             </td>
-            <td className="px-12 py-3 w-[11rem]h-[3rem]">{item.recieved_by}</td>
+            <td className="px-3 py-3 w-[11rem] text-center h-[3rem] text-[13px]">
+              {item.recieved_by}
+            </td>
 
-            <td className="px-12 py-3 w-[11rem]h-[3rem]">
+            <td className="px-12 py-3 w-[11rem] h-[3rem] text-[13px]">
               {item.recieved_date}
             </td>
-            <td className="px-12 py-3 w-[11rem]h-[3rem]">{item.location}</td>
-            <td className="px-12 py-3 w-[11rem]h-[3rem]">{item.status}</td>
+            <td className="px-12 py-3 w-[11rem] h-[3rem] text-[13px]">
+              {item.location}
+            </td>
+            <td className="px-12 py-3 w-[11rem] h-[3rem] text-[13px]">
+              {item.status}
+            </td>
 
-            <td className="flex h-[3rem] justify-center items-center gap-2 px-6">
-              <button className="px-2 h-7 border-solid border-2 border-indigo-600 text-sm rounded-[5px] hover:bg-indigo-600 hover:text-white">
-                View
-              </button>
-              <button className="px-2 h-7 border-solid border-2 border-indigo-600 text-sm rounded-[5px] hover:bg-indigo-600 hover:text-white">
-                Edit
-              </button>
-              <button className="px-2 h-7 border-solid border-2 border-indigo-600 text-sm rounded-[5px] hover:bg-indigo-600 hover:text-white">
-                Delete
-              </button>
+            <td className="flex h-[4rem] w-[] justify-center items-center gap-2 px-2 text-[13px]">
+              {item.actions}
             </td>
           </tr>
         ))}

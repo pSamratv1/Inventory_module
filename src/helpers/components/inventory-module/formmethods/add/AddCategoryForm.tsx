@@ -94,7 +94,6 @@ export default function AddCategoryForm() {
   //  OnSubmit Handler
   const onCategorySubmit: SubmitHandler<FormCateoryData> = (data) => {
     const newData = { ...data, dynamic_attr };
-    console.log(newData, "newData");
   };
   // UseEffect Hooks
 
@@ -135,7 +134,6 @@ export default function AddCategoryForm() {
                 <div className="grid grid-cols-12 gap-4">
                   {dynamic_attr &&
                     dynamic_attr.map((item: FormCateoryDetailData) => {
-                      console.log(item, "item");
                       return (
                         <div
                           className="col-span-6 min-w-[160px] justify-items-start"

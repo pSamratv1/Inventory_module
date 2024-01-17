@@ -31,7 +31,6 @@ export default function AddSupplierDetails() {
   const { isFlag } = useAppSelector(
     (state: RootState) => state.Inventory.inventory.supplier.add
   );
-  console.log(isFlag, "Is Flag for the supplier form");
 
   //   // Form Object for add
   //   const formObj: any = {

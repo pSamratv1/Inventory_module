@@ -48,7 +48,6 @@ export default function AddItemForm() {
   // OnSubmit handler
   const onSubmit = (data: FormData) => {
     // Ensure item_date is defined and has purchase_date and expiry_date properties
-    console.log(data, "formData Data");
     // Extract purchase_date and expiry_date from data
     const {
       purchase_date,
@@ -72,7 +71,6 @@ export default function AddItemForm() {
     dispatch(CreateInventoryThunk(updatedData));
 
     // Now, updatedData contains the original data excluding
-    console.log(updatedData, "updatedData");
     reset();
   };
 

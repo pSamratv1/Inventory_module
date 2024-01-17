@@ -19,7 +19,7 @@ export default function Table(props: CommonTableSchema) {
       >
         <thead
           style={{
-            color: "#fffff",
+            color: "#ffffff",
             fontSize: "20px",
           }}
           className="sticky text-left top-0 w-full bg-secondary-200 text-secondary-800 text-[20px]"
