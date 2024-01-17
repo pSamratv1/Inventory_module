@@ -82,7 +82,6 @@ export const renderItemTableHead = ({
         return (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column: any) => {
-              console.log(column);
               const isId = column.Header.toLowerCase() === "id";
               return column.hideHeader === false ? null : (
                 <th

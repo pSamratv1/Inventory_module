@@ -23,12 +23,38 @@ import SettingInvPage from "../../../helpers/components/inventory-module/formmet
 import DeleteItemForm from "../../../helpers/components/inventory-module/formmethods/delete/DeleteItemForm";
 import AddSupplierDetails from "helpers/components/inventory-module/formmethods/add/AddSupplierDetails";
 
+interface Data {
+  id: number | string;
+  purchase_date: string;
+  organization_id: number | string;
+  reorder_quantity: number | string;
+  purchase_place: string;
+  item_name: string;
+  expiry_date: string;
+  item_category: number;
+  supplier: number;
+  price: number;
+  quantity: number;
+  price_unit: string;
+  quantity_unit: string;
+  expiry_reminder: string;
+  low_stock_reminder: number;
+  dynamic_fields: null;
+  dynamic_category_fields: object;
+}
+[];
+
 const ItemPage = () => {
   const dispatch = useAppDispatch();
-  const { details } = useAppSelector(
-    (state: RootState) => state.Inventory.inventory.item.view.response
-  );
-  const data = details?.items?.length ? details?.items : [];
+
+  const data: Data =
+    useAppSelector(
+      (state: RootState) =>
+        state.Inventory.inventory.item.view.response.details["data "]
+    ) || [];
+  // const data: Data[] = details.data;
+  // console.log(details);
+  console.log(data, "data");
 
   // Hooks
 
