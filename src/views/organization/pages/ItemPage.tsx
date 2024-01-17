@@ -75,7 +75,7 @@ const ItemPage = () => {
       dispatch(setDeleteItemId(id));
     },
   });
-  const datas = data?.map((item: any) => ({
+  const datas = data.map((item: any) => ({
     ...item,
     actions: <TableActions {...getRoutes(item.id)} />,
   }));
