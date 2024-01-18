@@ -14,6 +14,7 @@ export default function MainRoute() {
           <Route path="dashboard" element={<Pages.InventoryPage />} />
           <Route path="reorder/:id" element={<Pages.ReorderPage />} />
           <Route path="track/:id" element={<Pages.TrackProductPage />} />
+          <Route path="supplier/:id" element={<Pages.SupplierPage />} />
         </Route>
 
         {/* Other routes */}

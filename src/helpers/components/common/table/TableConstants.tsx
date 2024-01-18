@@ -319,3 +319,34 @@ export const INVENTORY_TABLE_DATA = [
     supplier: 2,
   },
 ];
+
+export const SUPPLIER_TABLE_MEMO = [
+  {
+    Header: "",
+    id: "inventory_table",
+    isVisible: false,
+    hideHeader: false,
+    columns: [
+      {
+        Header: "Supplier Name",
+        accessor: "supplier_name",
+      },
+      {
+        Header: "Contact",
+        accessor: "contact",
+      },
+      {
+        Header: "Email",
+        accessor: "email",
+      },
+      {
+        Header: "Address",
+        accessor: "address",
+      },
+      {
+        Header: "Actions",
+        accessor: "actions",
+      },
+    ],
+  },
+];
