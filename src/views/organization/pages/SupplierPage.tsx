@@ -71,7 +71,7 @@ const SupplierPage = () => {
       supplier_name: "Samrat Pahari",
       contact: "9867373778",
       email: "samratpahari@gmail.com",
-      address: "Thaliba",
+      address: "Thalib",
     },
   ];
   const getRoutes = (item: any) => ({
