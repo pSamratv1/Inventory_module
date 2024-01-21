@@ -54,7 +54,7 @@ const ItemPage = () => {
     ) || [];
   // const data: Data[] = details.data;
   // console.log(details);
-  console.log(data, "data");
+  // console.log(data, "data");
 
   // Hooks
 

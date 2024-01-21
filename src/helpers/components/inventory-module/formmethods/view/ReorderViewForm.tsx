@@ -140,7 +140,7 @@ export default function ReorderViewForm() {
         >
           <div className="z-[101] w-[calc(50vw+10rem)] sm:min-w-[350px] sm:max-w-[600px] h-[calc(100vh-9.4rem)] pb-1 bg-white text-xs rounded-md px-6 py-8 ">
             <p className="text-base text-primary-medium font-medium text-blue">
-              Add Item
+              View Reorder
             </p>
             <ReorderForm formObj={formObj} form={form} />
           </div>

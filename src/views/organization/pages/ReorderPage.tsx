@@ -1,29 +1,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMemo } from "react";
-import {
-  REORDER_PRODUCT_TABLE_DATA,
-  REORDER_PRODUCT_TABLE_MEMO,
-} from "../../../helpers/components/common/table/TableConstants";
+import { REORDER_PRODUCT_TABLE_MEMO } from "../../../helpers/components/common/table/TableConstants";
 import { ReorderTable } from "../../../helpers/components/inventory-module/formmethods/view/ReorderTable";
 import {
   useAppDispatch,
+  useAppSelector,
   // useAppSelector,
 } from "../../../helpers/hooks/useStoreHooks";
 import {
   setReorderProductId,
   setReorderViewData,
   setReorderViewTrue,
-  setTrackOrderTrue,
-  setTrackProductData,
-  setTrackProductId,
 } from "../../../redux-app/inventory-module/InventorySlice";
 import TableActions from "../../../helpers/components/common/table/TableActions";
 import ReorderViewForm from "../../../helpers/components/inventory-module/formmethods/view/ReorderViewForm";
+import { RootState } from "redux-app/store";
+import { Data } from "./ItemPage";
 
 const ReorderPage = () => {
   const dispatch = useAppDispatch();
   const columns = useMemo(() => REORDER_PRODUCT_TABLE_MEMO, []);
-  const data = useMemo(() => REORDER_PRODUCT_TABLE_DATA, []);
+  const data: Data =
+    useAppSelector(
+      (state: RootState) =>
+        state.Inventory.inventory.reorder.view.response.details["data "]
+    ) || [];
 
   // const { details } = useAppSelector(
   //   (state) => state.Inventory.inventory.item.view.response
@@ -31,16 +32,12 @@ const ReorderPage = () => {
 
   // const { items } = details;
   const getRoutes = (item: any) => ({
-    handleViewAction: () => {
+    handleViewAction: () => {},
+    handleDeleteAction: () => {},
+    handleEditAction: () => {
       dispatch(setReorderViewData(item));
       dispatch(setReorderViewTrue(true));
       dispatch(setReorderProductId(item.id));
-    },
-    handleDeleteAction: () => {},
-    handleEditAction: () => {
-      dispatch(setTrackOrderTrue(true));
-      dispatch(setTrackProductId(item.id));
-      dispatch(setTrackProductData(item));
     },
   });
 
