@@ -23,7 +23,8 @@ import SettingInvPage from "../../../helpers/components/inventory-module/formmet
 import DeleteItemForm from "../../../helpers/components/inventory-module/formmethods/delete/DeleteItemForm";
 import AddSupplierDetails from "helpers/components/inventory-module/formmethods/add/AddSupplierDetails";
 
-interface Data {
+export interface Data {
+  [x: string]: any;
   id: number | string;
   purchase_date: string;
   organization_id: number | string;
