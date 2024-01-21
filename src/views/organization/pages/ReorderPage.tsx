@@ -29,7 +29,7 @@ const ReorderPage = () => {
   // const { details } = useAppSelector(
   //   (state) => state.Inventory.inventory.item.view.response
   // );
-
+  console.log(data, "data");
   // const { items } = details;
   const getRoutes = (item: any) => ({
     handleViewAction: () => {},
@@ -41,14 +41,22 @@ const ReorderPage = () => {
     },
   });
 
-  const datas = data?.map((item: any) => ({
+  // Filter the array based on the presence of reorder_quantity
+  const filteredArray = data.filter(
+    (item: Data) => item.reorder_quantity !== null
+  );
+  console.log(filteredArray, "filteredArray");
+
+  const updatedData = filteredArray?.map((item: Data) => ({
     ...item,
     action: <TableActions {...getRoutes(item)} />,
   }));
 
+  // action: <TableActions {...getRoutes(item)} />,
+
   const ReorderTableProps = {
     columns: columns[0].columns,
-    data: datas,
+    data: updatedData,
     // data: how to pass the data from the Api endPoint into the data of table,
   };
 

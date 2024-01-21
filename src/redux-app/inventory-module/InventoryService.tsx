@@ -49,7 +49,7 @@ export const DeleteInventoryService = async (id: any) => {
     console.log("DeleteInventoryService failed. Please try again later.", e);
   }
 };
-
+// Inventory Re-Order Services (Create reoreder subscriptions)
 export const AddReOrderServices = async ({ updatedData, id }: any) => {
   const URL = `${import.meta.env.VITE_INVENTORY_API_URL}${1}/item-add/${id}/`;
 
@@ -61,7 +61,7 @@ export const AddReOrderServices = async ({ updatedData, id }: any) => {
     console.log("AddReOrderServices failed. Please try again later.", e);
   }
 };
-// Inventory Services (Create service subscriptions)
+// Inventory Supplier Services (Create service subscriptions)
 export const CreateSuppierServices = async ({ updatedData, id }: any) => {
   try {
     // const URL = import.meta.env.VITE_ORGANIZATION_API_URL;
@@ -72,5 +72,17 @@ export const CreateSuppierServices = async ({ updatedData, id }: any) => {
     return data;
   } catch (err: any) {
     throw new Error("CreateSuppierServices failed. Please try again later.");
+  }
+};
+
+// Inventory Track Services (Create track subscriptions)
+export const GetTrackServices = async (id: number) => {
+  try {
+    const URL = `${import.meta.env.VITE_INVENTORY_API_URL}${id}/track/`;
+
+    const { data } = await axios.get(URL!);
+    return data;
+  } catch (err: any) {
+    throw new Error("GetTrackrServices failed. Please try again later.");
   }
 };

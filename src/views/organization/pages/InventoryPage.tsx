@@ -4,6 +4,7 @@ import { Cards } from "../../../helpers/components/common";
 import BarChart from "../../../helpers/components/common/charts/BarChart";
 import PieChart from "../../../helpers/components/common/charts/PieChart";
 import LineChart from "../../../helpers/components/common/charts/LineChart";
+import { useAppDispatch } from "helpers/hooks/useStoreHooks";
 
 // yeso schema needs to be made and used instead of the InventoryData
 
@@ -12,6 +13,17 @@ export type CardSchema = {
   value: string;
 };
 const InventoryPage = () => {
+  const dispatch = useAppDispatch();
+
+  // // IsSuccess flag for the api fetching
+  // const { isSuccess } = useAppSelector(
+  //   (state: RootState) => state.Inventory.inventory.track.view.response
+  // );
+  // // Fetch data when the component mounts
+  // useEffect(() => {
+  //   dispatch(GetAllTrackThunk(1));
+  // }, [dispatch, isSuccess]);
+
   // Define the state for the date range
   // const [values, setValues] = useState<DateObject[]>([]);
   // // Handle the date range change

@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ControlBar } from "../../../helpers/components/common/table/ControlBar";
-import { useAppDispatch } from "../../../helpers/hooks/useStoreHooks";
 import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../helpers/hooks/useStoreHooks";
+import {
+  GetAllTrackThunk,
   setAddCategoryTrue,
   setAddItemTrue,
   setScannerCameraOpen,
@@ -10,10 +14,7 @@ import {
   // setTrackProductData,
   // setTrackProductId,
 } from "../../../redux-app/inventory-module/InventorySlice";
-import {
-  TRACK_TABLE_DATA,
-  TRACK_TABLE_MEMO,
-} from "../../../helpers/components/common/table/TableConstants";
+import { TRACK_TABLE_MEMO } from "../../../helpers/components/common/table/TableConstants";
 import { useMemo, useState } from "react";
 import { addBtnControlbar } from "utils/methods/css";
 import TrackTable from "../../../helpers/components/inventory-module/formmethods/view/TrackTable";
@@ -21,12 +22,18 @@ import { BiBarcodeReader, BiChevronDown } from "react-icons/bi";
 import TrackDetailsForm from "helpers/components/inventory-module/formmethods/edit/TrackDetailsForm";
 
 import CameraComponent from "helpers/components/common/scanners/BarCodeScanner";
+import { RootState } from "redux-app/store";
+import { useQuery } from "react-query";
+import { useTrackData } from "helpers/hooks/useTrackData";
 // import TrackTable from "../../../helpers/components/inventory-module/formmethods/view/TrackTable";
+
+// Create a custom hook using useQuery
 
 const TrackProductPage = () => {
   const dispatch = useAppDispatch();
+  const { data, isSuccess } = useTrackData(1);
   const column = useMemo(() => TRACK_TABLE_MEMO, []);
-  const data = useMemo(() => TRACK_TABLE_DATA, []);
+  // const data = useMemo(() => TRACK_TABLE_DATA, []);?
 
   const [isEditFormOpen, setIsEditFormOpen] = useState(false);
   const [openCamera, setOpenCamera] = useState(false);
@@ -35,23 +42,12 @@ const TrackProductPage = () => {
     setOpenCamera(true);
     dispatch(setScannerCameraOpen(true));
   };
-  // const getRoutes = (item: any) => ({
-  //   handleViewAction: () => {
-  //     navigate(`/profile/view/${item.id}`);
-  //   },
-  //   handleEditAction: () => {
-  //     dispatch(setTrackOrderTrue(true));
-  //     dispatch(setTrackProductId(item.id));
-  //     dispatch(setTrackProductData(item));
-  //     setIsEditFormOpen(true);
-  //   },
-  //   handleDeleteAction: () => {},
-  // });
 
-  const datas = data?.map((item: any) => ({
+  const datas = details.data?.map((item: any) => ({
     ...item,
     icons: <BiChevronDown />,
   }));
+  console.log(datas, "datas");
 
   const viewItemTableProps = {
     columns: column[0].columns,

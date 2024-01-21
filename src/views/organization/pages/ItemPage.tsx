@@ -28,7 +28,7 @@ export interface Data {
   id: number | string;
   purchase_date: string;
   organization_id: number | string;
-  reorder_quantity: number | string;
+  reorder_quantity: number | string | null;
   purchase_place: string;
   item_name: string;
   expiry_date: string;
@@ -38,8 +38,8 @@ export interface Data {
   quantity: number;
   price_unit: string;
   quantity_unit: string;
-  expiry_reminder: string;
-  low_stock_reminder: number;
+  expiry_reminder: string | null;
+  low_stock_reminder: number | null;
   dynamic_fields: null;
   dynamic_category_fields: object;
 }

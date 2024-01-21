@@ -11,6 +11,7 @@ import {
   DeleteInventoryService,
   EditInventoryServices,
   GetAllInventoryServices,
+  GetTrackServices,
 } from "./InventoryService";
 import { useAppSelector } from "../../helpers/hooks/useStoreHooks";
 
@@ -280,6 +281,18 @@ export const AddSupplierThunk = createAsyncThunk(
   }
 );
 
+export const GetAllTrackThunk = createAsyncThunk(
+  "GetAllTrackThunk",
+  async (id: number, thunkAPI) => {
+    try {
+      console.log(id, "formdDataaaaaaaa");
+      return await GetTrackServices(id);
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(getReduxErrorMsg(error));
+    }
+  }
+);
+
 export const InventorySlice = createSlice({
   name: " inventory",
   initialState,
@@ -468,6 +481,19 @@ export const InventorySlice = createSlice({
       .addCase(AddSupplierThunk.rejected, (state) => {
         state.inventory.supplier.add.response.isSuccess = false;
         state.inventory.supplier.add.response.isLoading = false;
+      })
+      // Get All Track Item modules
+      .addCase(GetAllTrackThunk.pending, (state) => {
+        state.inventory.track.view.response.isLoading = true;
+      })
+      .addCase(GetAllTrackThunk.fulfilled, (state, action) => {
+        state.inventory.track.view.response.isLoading = false;
+        state.inventory.track.view.response.isSuccess = true;
+        state.inventory.track.view.response.details = action.payload;
+      })
+      .addCase(GetAllTrackThunk.rejected, (state) => {
+        state.inventory.track.view.response.isSuccess = false;
+        state.inventory.track.view.response.isLoading = false;
       });
   },
 });

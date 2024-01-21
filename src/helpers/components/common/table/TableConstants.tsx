@@ -53,12 +53,12 @@ export const TRACK_TABLE_MEMO = [
       },
       {
         Header: "Item Name",
-        accessor: "supplier_item",
+        accessor: "item_name",
       },
 
       {
         Header: "Supplier Name",
-        accessor: "supplier_name",
+        accessor: "supplied_by",
       },
 
       {

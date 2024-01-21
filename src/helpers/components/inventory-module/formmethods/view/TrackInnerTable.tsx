@@ -81,7 +81,7 @@
 // export default TrackInnerTable;
 import TableActions from "helpers/components/common/table/TableActions";
 import { TRACK_PRODUCT_TABLE_DATA } from "helpers/components/common/table/TableConstants";
-import { useAppDispatch } from "helpers/hooks/useStoreHooks";
+import { useAppDispatch, useAppSelector } from "helpers/hooks/useStoreHooks";
 import { useMemo } from "react";
 import {
   setReorderId,
@@ -91,10 +91,15 @@ import {
   setItemDeleteTrue,
   setDeleteItemId,
 } from "redux-app/inventory-module/InventorySlice";
+import { RootState } from "redux-app/store";
 
 const TrackInnerTable = () => {
   const dispatch = useAppDispatch();
-  const data = useMemo(() => TRACK_PRODUCT_TABLE_DATA, []);
+  const { details } = useAppSelector(
+    (state: RootState) => state.Inventory.inventory.track.view.response
+  );
+  const data = details.data.item;
+
   const getRoutes = (id: number) => ({
     handleViewAction: () => {
       dispatch(setReorderId(id));
@@ -113,6 +118,7 @@ const TrackInnerTable = () => {
     ...item,
     actions: <TableActions {...getRoutes(item.id)} />,
   }));
+  console.log(datas, "inside the inner table");
   return (
     <table className="">
       <thead className="">
