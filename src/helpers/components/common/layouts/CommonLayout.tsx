@@ -4,6 +4,7 @@ import { GetAllInventoryServicesThunk } from "../../../../redux-app/inventory-mo
 import { useAppDispatch, useAppSelector } from "../../../hooks/useStoreHooks";
 import { RootState } from "../../../../redux-app/store";
 import { Sidebar } from "./Sidebar";
+import { useTrackData } from "helpers/hooks/useTrackData";
 
 export default function CommonLayout() {
   const dispatch = useAppDispatch();
@@ -11,6 +12,7 @@ export default function CommonLayout() {
   const { isSuccess } = useAppSelector(
     (state: RootState) => state.Inventory.inventory.item.add.response
   );
+  const { _ } = useTrackData(1);
 
   // Fetch data when the component mounts
   useEffect(() => {

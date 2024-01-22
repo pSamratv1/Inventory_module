@@ -141,6 +141,7 @@ export const RenderItemTableHead = ({
 };
 // ViewNavOrganizationle body
 export const RenderItemTableBody = ({ rows, prepareRow }: any) => {
+  // console.log(rows, "rows");
   const [clickedId, setClickedId] = useState(0);
   const [testId, setTestId] = useState<number[] | any>([]);
   const [isFlag, setIsFlag] = useState(false);

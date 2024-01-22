@@ -5,7 +5,6 @@ import {
   useAppSelector,
 } from "../../../helpers/hooks/useStoreHooks";
 import {
-  GetAllTrackThunk,
   setAddCategoryTrue,
   setAddItemTrue,
   setScannerCameraOpen,
@@ -23,17 +22,17 @@ import TrackDetailsForm from "helpers/components/inventory-module/formmethods/ed
 
 import CameraComponent from "helpers/components/common/scanners/BarCodeScanner";
 import { RootState } from "redux-app/store";
-import { useQuery } from "react-query";
-import { useTrackData } from "helpers/hooks/useTrackData";
-// import TrackTable from "../../../helpers/components/inventory-module/formmethods/view/TrackTable";
 
 // Create a custom hook using useQuery
 
 const TrackProductPage = () => {
   const dispatch = useAppDispatch();
-  const { data, isSuccess } = useTrackData(1);
+
+  const { details } = useAppSelector(
+    (state: RootState) => state.Inventory.inventory.track.view.response
+  );
+
   const column = useMemo(() => TRACK_TABLE_MEMO, []);
-  // const data = useMemo(() => TRACK_TABLE_DATA, []);?
 
   const [isEditFormOpen, setIsEditFormOpen] = useState(false);
   const [openCamera, setOpenCamera] = useState(false);
@@ -43,16 +42,16 @@ const TrackProductPage = () => {
     dispatch(setScannerCameraOpen(true));
   };
 
-  const datas = details.data?.map((item: any) => ({
+  const datas = details?.data?.map((item: any) => ({
     ...item,
     icons: <BiChevronDown />,
   }));
-  console.log(datas, "datas");
 
   const viewItemTableProps = {
     columns: column[0].columns,
     data: datas,
   };
+
   const controlbarProps = {
     addCategoryBtnControlbar: {
       css: { customCss: addBtnControlbar },

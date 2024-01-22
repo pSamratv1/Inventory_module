@@ -81,6 +81,7 @@ export const GetTrackServices = async (id: number) => {
     const URL = `${import.meta.env.VITE_INVENTORY_API_URL}${id}/track/`;
 
     const { data } = await axios.get(URL!);
+    console.log(data, "Data inside the Thunk");
     return data;
   } catch (err: any) {
     throw new Error("GetTrackrServices failed. Please try again later.");
