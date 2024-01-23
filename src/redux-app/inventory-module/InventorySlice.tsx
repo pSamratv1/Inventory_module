@@ -11,7 +11,8 @@ import {
   DeleteInventoryService,
   EditInventoryServices,
   GetAllInventoryServices,
-  GetTrackServices,
+  GetAllSupplierServices,
+  GetAllTrackServices,
 } from "./InventoryService";
 import { useAppSelector } from "../../helpers/hooks/useStoreHooks";
 
@@ -234,7 +235,6 @@ export const EditInventoryThunk = createAsyncThunk(
   "EditInventoryThunk",
   async ({ formData, id }: any, thunkAPI) => {
     try {
-      console.log(formData, id, "formdDataaaaaaaa");
       return await EditInventoryServices({ formData, id });
     } catch (error: any) {
       return thunkAPI.rejectWithValue(getReduxErrorMsg(error));
@@ -271,10 +271,10 @@ export const AddReOrderThunk = createAsyncThunk(
 
 export const AddSupplierThunk = createAsyncThunk(
   "AddSupplierThunk",
-  async ({ updatedData, id }: any, thunkAPI) => {
+  async (updatedData: any, thunkAPI) => {
     try {
-      console.log(updatedData, id, "formdDataaaaaaaa");
-      return await CreateSuppierServices({ updatedData, id });
+      console.log(updatedData, "formdDataaaaaaaa");
+      return await CreateSuppierServices(updatedData);
     } catch (error: any) {
       return thunkAPI.rejectWithValue(getReduxErrorMsg(error));
     }
@@ -285,8 +285,18 @@ export const GetAllTrackThunk = createAsyncThunk(
   "GetAllTrackThunk",
   async (id: number, thunkAPI) => {
     try {
-      console.log(id, "formdDataaaaaaaa");
-      return await GetTrackServices(id);
+      return await GetAllTrackServices(id);
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(getReduxErrorMsg(error));
+    }
+  }
+);
+
+export const GetAllSupplierThunk = createAsyncThunk(
+  "GetAllSupplierThunk",
+  async (id: number, thunkAPI) => {
+    try {
+      return await GetAllSupplierServices(id);
     } catch (error: any) {
       return thunkAPI.rejectWithValue(getReduxErrorMsg(error));
     }
@@ -494,6 +504,19 @@ export const InventorySlice = createSlice({
       .addCase(GetAllTrackThunk.rejected, (state) => {
         state.inventory.track.view.response.isSuccess = false;
         state.inventory.track.view.response.isLoading = false;
+      })
+      // Get All Supplier Details
+      .addCase(GetAllSupplierThunk.pending, (state) => {
+        state.inventory.supplier.view.response.isLoading = true;
+      })
+      .addCase(GetAllSupplierThunk.fulfilled, (state, action) => {
+        state.inventory.supplier.view.response.isLoading = false;
+        state.inventory.supplier.view.response.isSuccess = true;
+        state.inventory.supplier.view.response.details = action.payload;
+      })
+      .addCase(GetAllSupplierThunk.rejected, (state) => {
+        state.inventory.supplier.view.response.isSuccess = false;
+        state.inventory.supplier.view.response.isLoading = false;
       });
   },
 });

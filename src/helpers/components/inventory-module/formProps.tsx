@@ -69,11 +69,10 @@ export const trackProductValidation = () => {
 };
 export const SupplierValidation = () => {
   const validationSchema = yup.object({
-    supplier_item_name: nameValidation,
     supplier_name: nameValidation,
-    email: emailValidation,
-    contact: valueValidation,
-    address: nameValidation,
+    supplier_email: emailValidation,
+    supplier_contact: valueValidation,
+    supplier_address: nameValidation,
   });
 
   return validationSchema;
@@ -114,22 +113,27 @@ export const supplierItemProps = ({ defaultValue }: any) => ({
   defaultValue: defaultValue ?? "",
 });
 
-export const emailProps = ({ defaultValue, handleOnChange }: any) => ({
-  input: "email",
-  label: "Email",
+export const supplierEmailProps = ({ defaultValue }: any) => ({
+  input: "supplier_email",
+  label: "Supplier Email",
   placeholder: "Enter Supplier Email",
   showImportant: true,
   defaultValue: defaultValue ?? "",
-  onchange: handleOnChange,
+});
+export const emailProps = ({ defaultValue }: any) => ({
+  input: "email",
+  label: "Email",
+  placeholder: "Enter  Email",
+  showImportant: true,
+  defaultValue: defaultValue ?? "",
 });
 
-export const supplierProps = ({ defaultValue, handleOnChange }: any) => ({
+export const supplierProps = ({ defaultValue }: any) => ({
   input: "supplier_name",
   label: "Supplier Name",
   placeholder: "Enter Supplier Name",
   showImportant: true,
   defaultValue: defaultValue ?? "",
-  onchange: handleOnChange,
 });
 
 export const categoryDetailProps = ({ defaultValue, handleOnChange }: any) => ({
@@ -283,9 +287,24 @@ export const locationProps = ({ defaultValue }: any) => ({
   defaultValue: defaultValue ?? "",
 });
 
+export const supplierLocationProps = ({ defaultValue }: any) => ({
+  input: "supplier_address",
+  label: "Supplier Address",
+  placeholder: "example: Kathamandu",
+  showImportant: true,
+  defaultValue: defaultValue ?? "",
+});
+
 export const contactProps = ({ defaultValue }: any) => ({
   input: "contact",
   label: "Contact",
+  placeholder: "example: 986737373778",
+  showImportant: true,
+  defaultValue: defaultValue ?? "",
+});
+export const supplierContactProps = ({ defaultValue }: any) => ({
+  input: "supplier_contact",
+  label: "Supplier Contact",
   placeholder: "example: 986737373778",
   showImportant: true,
   defaultValue: defaultValue ?? "",
@@ -313,6 +332,7 @@ export const statusProps = ({ defaultValue }: any) => ({
 });
 
 export const addItemBtnProps = {
+  onclick: () => console.log("clicked"),
   title: "Save",
   css: {
     customCss:
@@ -343,4 +363,13 @@ export const addCatgeoryDetailsBtnProps = (handleAction: any) => ({
   },
   icon: <MdOutlineAddCircleOutline />,
   handleAction,
+});
+
+export const addSupplierDetailsBtnProps = () => ({
+  title: "Add Supplier",
+  css: {
+    customCss:
+      "w-[8rem] px-3 py-2 flex gap-1 justify-center items-center  bg-primary-dark text-white border-[1px] border-primary-medium font-medium text-[12px] rounded-sm",
+    iconCss: "text-[18px] font-black",
+  },
 });

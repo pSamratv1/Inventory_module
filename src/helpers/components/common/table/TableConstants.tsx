@@ -333,15 +333,15 @@ export const SUPPLIER_TABLE_MEMO = [
       },
       {
         Header: "Contact",
-        accessor: "contact",
+        accessor: "supplier_contact",
       },
       {
         Header: "Email",
-        accessor: "email",
+        accessor: "supplier_email",
       },
       {
         Header: "Address",
-        accessor: "address",
+        accessor: "supplier_address",
       },
       {
         Header: "Actions",

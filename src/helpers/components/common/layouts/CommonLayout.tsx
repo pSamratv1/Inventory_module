@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { GetAllInventoryServicesThunk } from "../../../../redux-app/inventory-module/InventorySlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/useStoreHooks";
 import { RootState } from "../../../../redux-app/store";
 import { Sidebar } from "./Sidebar";
-import { useTrackData } from "helpers/hooks/useTrackData";
+import { useFetchTrackData } from "helpers/hooks/useFetchTrackData";
 
 export default function CommonLayout() {
   const dispatch = useAppDispatch();
@@ -12,7 +13,7 @@ export default function CommonLayout() {
   const { isSuccess } = useAppSelector(
     (state: RootState) => state.Inventory.inventory.item.add.response
   );
-  const { _ } = useTrackData(1);
+  const { data: trackData } = useFetchTrackData(1);
 
   // Fetch data when the component mounts
   useEffect(() => {

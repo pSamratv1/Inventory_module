@@ -5,8 +5,8 @@ import { ButtonSchema } from "../../../../utils/schemas/helpers/components/Compo
 export default function Button(props: ButtonSchema) {
   // Props
   const { title, handleAction, css, isFlag, icon } = props;
+  const { customCss, iconCss } = css;
   // Props variables
-  const { customCss, iconCss } = css!;
 
   const onClick = handleAction && handleAction;
   const className = customCss ?? formButtonCss;

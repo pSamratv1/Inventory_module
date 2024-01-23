@@ -2,8 +2,8 @@
 import TableActions from "helpers/components/common/table/TableActions";
 import { SUPPLIER_TABLE_MEMO } from "helpers/components/common/table/TableConstants";
 import SupplierTable from "helpers/components/inventory-module/formmethods/view/SupplierTable";
-import { useAppDispatch } from "helpers/hooks/useStoreHooks";
-import { useMemo } from "react";
+import { useAppDispatch, useAppSelector } from "helpers/hooks/useStoreHooks";
+import { useEffect, useMemo } from "react";
 import {
   setReorderViewData,
   setReorderViewTrue,
@@ -11,69 +11,26 @@ import {
   setTrackOrderTrue,
   setTrackProductId,
   setTrackProductData,
+  GetAllSupplierThunk,
 } from "redux-app/inventory-module/InventorySlice";
+import { RootState } from "redux-app/store";
+import AddSupplierDetails from "helpers/components/inventory-module/formmethods/add/AddSupplierDetails";
 
 const SupplierPage = () => {
   const dispatch = useAppDispatch();
   const columns = useMemo(() => SUPPLIER_TABLE_MEMO, []);
-  const data = [
-    {
-      id: 1,
-      supplier_name: "Samrat Pahari",
-      contact: "9867373778",
-      email: "samratpahari@gmail.com",
-      address: "Thaliba",
-    },
-    {
-      id: 2,
-      supplier_name: "Samrat Pahari",
-      contact: "9867373778",
-      email: "samratpahari@gmail.com",
-      address: "Thaliba",
-    },
-    {
-      id: 3,
-      supplier_name: "Samrat Pahari",
-      contact: "9867373778",
-      email: "samratpahari@gmail.com",
-      address: "Thaliba",
-    },
-    {
-      id: 4,
-      supplier_name: "Samrat Pahari",
-      contact: "9867373778",
-      email: "samratpahari@gmail.com",
-      address: "Thaliba",
-    },
-    {
-      id: 5,
-      supplier_name: "Samrat Pahari",
-      contact: "9867373778",
-      email: "samratpahari@gmail.com",
-      address: "Thaliba",
-    },
-    {
-      id: 6,
-      supplier_name: "Samrat Pahari",
-      contact: "9867373778",
-      email: "samratpahari@gmail.com",
-      address: "Thaliba",
-    },
-    {
-      id: 7,
-      supplier_name: "Samrat Pahari",
-      contact: "9867373778",
-      email: "samratpahari@gmail.com",
-      address: "Thaliba",
-    },
-    {
-      id: 8,
-      supplier_name: "Samrat Pahari",
-      contact: "9867373778",
-      email: "samratpahari@gmail.com",
-      address: "Thalib",
-    },
-  ];
+  const { isSuccess } = useAppSelector(
+    (state: RootState) => state.Inventory.inventory.supplier.view.response
+  );
+  const { details } = useAppSelector(
+    (state: RootState) => state.Inventory.inventory.supplier.view.response
+  );
+
+  // Fetch data when the component mounts
+  useEffect(() => {
+    dispatch(GetAllSupplierThunk(1));
+  }, [dispatch, isSuccess]);
+
   const getRoutes = (item: any) => ({
     handleViewAction: () => {
       dispatch(setReorderViewData(item));
@@ -87,7 +44,7 @@ const SupplierPage = () => {
       dispatch(setTrackProductData(item));
     },
   });
-  const datas = data?.map((item: any) => ({
+  const datas = details?.map((item: any) => ({
     ...item,
     actions: <TableActions {...getRoutes(item.id)} />,
   }));
@@ -95,7 +52,12 @@ const SupplierPage = () => {
     column: columns[0].columns,
     data: datas,
   };
-  return <SupplierTable columns={columns[0].columns} {...supplierTableProps} />;
+  return (
+    <>
+      <SupplierTable columns={columns[0].columns} {...supplierTableProps} />
+      <AddSupplierDetails />
+    </>
+  );
 };
 
 export default SupplierPage;

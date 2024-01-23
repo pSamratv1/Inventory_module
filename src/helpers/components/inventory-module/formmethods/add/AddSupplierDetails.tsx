@@ -7,55 +7,114 @@ import {
 } from "../../../../hooks/useStoreHooks";
 import { CenterSection, CloseIconButton } from "../../../common";
 
-import { setSupplierAddTrue } from "../../../../../redux-app/inventory-module/InventorySlice";
+import {
+  AddSupplierThunk,
+  setSupplierAddTrue,
+} from "../../../../../redux-app/inventory-module/InventorySlice";
 import AddCategoryForm from "./AddCategoryForm";
 import SupplierForm from "../../SupplierForm";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { SubmitHandler, useForm } from "react-hook-form";
+import {
+  SupplierValidation,
+  commonActions,
+  supplierProps,
+  supplierEmailProps,
+  supplierContactProps,
+  supplierLocationProps,
+} from "../../formProps";
 
-// interface FormData {
-//   item_name: string;
-//   supplier_name: string;
-//   email: string;
-//   contact: string;
-//   address: string;
-// }
+interface FormData {
+  // item_name: string;
+  supplier_name: string;
+  supplier_email: string;
+  supplier_contact: string;
+  supplier_address: string;
+}
 // import { transformOptionsInObj } from "utils/methods/stringMethods";
 export default function AddSupplierDetails() {
   //  Redux
   const dispatch = useAppDispatch();
 
+  // form Submit handler for add
   // OnSubmit handler
+  const onSubmit: SubmitHandler<FormData> = (data: FormData) => {
+    // Ensure item_date is defined and has purchase_date and expiry_date properties
+    const {
+      supplier_name,
+      supplier_email,
+      supplier_contact,
+      supplier_address,
+      ...restData
+    } = data;
 
-  // Form Object for add
+    // Combine restData with itemDate
+    const updatedData = {
+      ...restData,
+      organization_id: 1,
+      supplier_name: supplier_name,
+      supplier_email: supplier_email,
+      supplier_contact: supplier_contact,
+      supplier_address: supplier_address,
+    };
+    console.log(updatedData, "updatedDatadsdfsfsef");
+
+    dispatch(AddSupplierThunk(updatedData));
+    //
+    // Now, updatedData contains the original data excluding
+    reset();
+    dispatch(setSupplierAddTrue(false));
+  };
 
   // Redux variables
   const { isFlag } = useAppSelector(
     (state: RootState) => state.Inventory.inventory.supplier.add
   );
 
-  //   // Form Object for add
-  //   const formObj: any = {
-  //     supplier_item_name: {
-  //       common: supplierItemProps({}),
-  //       ...remaining,
-  //     },
-  //     supplier_name: {
-  //       common: supplierProps({}),
-  //       ...remaining,
-  //     },
-  //     email: {
-  //       common: emailProps({}),
-  //       ...remaining,
-  //     },
+  const validationSchema: any = SupplierValidation();
 
-  //     contact: {
-  //       common: contactProps({}),
-  //       ...remaining,
-  //     },
-  //     address: {
-  //       common: locationProps({}),
-  //       ...remaining,
-  //     },
-  //   };
+  // react-hook-form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    getValues,
+    reset,
+  } = useForm<FormData>({
+    resolver: yupResolver(validationSchema),
+  });
+  // Redux variables
+  const form = {
+    register,
+    handleSubmit,
+    onSubmit: onSubmit,
+    errors,
+    setValue,
+    getValues,
+  };
+  const remaining = { actions: commonActions, form, css: {} };
+  // Form Object for add
+  const formObj: any = {
+    supplier_name: {
+      common: supplierProps({}),
+      ...remaining,
+    },
+    supplier_email: {
+      common: supplierEmailProps({}),
+      ...remaining,
+    },
+
+    supplier_contact: {
+      common: supplierContactProps({}),
+      ...remaining,
+    },
+    supplier_address: {
+      common: supplierLocationProps({}),
+      ...remaining,
+    },
+  };
+
   return (
     <>
       {isFlag && (
@@ -69,7 +128,7 @@ export default function AddSupplierDetails() {
             <p className="text-base text-primary-medium font-medium text-blue">
               Add Supplier
             </p>
-            <SupplierForm />
+            <SupplierForm formObj={formObj} form={form} />
           </div>
           <CloseIconButton
             css={{}}
