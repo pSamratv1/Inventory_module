@@ -9,6 +9,7 @@ import { CenterSection, CloseIconButton } from "../../../common";
 
 import {
   AddSupplierThunk,
+  GetAllSupplierThunk,
   setSupplierAddTrue,
 } from "../../../../../redux-app/inventory-module/InventorySlice";
 import AddCategoryForm from "./AddCategoryForm";
@@ -23,6 +24,7 @@ import {
   supplierContactProps,
   supplierLocationProps,
 } from "../../formProps";
+import { useEffect } from "react";
 
 interface FormData {
   // item_name: string;
@@ -35,6 +37,12 @@ interface FormData {
 export default function AddSupplierDetails() {
   //  Redux
   const dispatch = useAppDispatch();
+  const { isSuccess } = useAppSelector(
+    (state: RootState) => state.Inventory.inventory.supplier.add.response
+  );
+  useEffect(() => {
+    dispatch(GetAllSupplierThunk(1));
+  }, [isSuccess, dispatch]);
 
   // form Submit handler for add
   // OnSubmit handler
@@ -60,7 +68,7 @@ export default function AddSupplierDetails() {
     console.log(updatedData, "updatedDatadsdfsfsef");
 
     dispatch(AddSupplierThunk(updatedData));
-    //
+
     // Now, updatedData contains the original data excluding
     reset();
     dispatch(setSupplierAddTrue(false));

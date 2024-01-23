@@ -423,15 +423,9 @@ export const InventorySlice = createSlice({
         state.inventory.item.add.response.isLoading = true;
       })
       .addCase(CreateInventoryThunk.fulfilled, (state, action) => {
-        // Variables
-        const payload = action.payload;
-        const { status } = payload;
-
-        if (status === "successful") {
-          state.inventory.item.add.response.isLoading = false;
-          state.inventory.item.add.response.isSuccess = true;
-          state.inventory.item.add.response.details = payload;
-        }
+        state.inventory.item.add.response.isLoading = false;
+        state.inventory.item.add.response.isSuccess = true;
+        state.inventory.item.add.response.details = action.payload;
       })
       .addCase(CreateInventoryThunk.rejected, (state) => {
         state.inventory.item.add.response.isSuccess = false;

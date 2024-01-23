@@ -25,9 +25,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import dayjs from "dayjs";
 import {
   CreateInventoryThunk,
+  GetAllInventoryServicesThunk,
   setAddItemTrue,
 } from "../../../../../redux-app/inventory-module/InventorySlice";
 import AddCategoryForm from "./AddCategoryForm";
+import { useEffect } from "react";
 
 interface FormData {
   item_name: string;
@@ -44,7 +46,12 @@ interface FormData {
 export default function AddItemForm() {
   //  Redux
   const dispatch = useAppDispatch();
-
+  const { isSuccess } = useAppSelector(
+    (state: RootState) => state.Inventory.inventory.item.add.response
+  );
+  useEffect(() => {
+    dispatch(GetAllInventoryServicesThunk());
+  }, [isSuccess, dispatch]);
   // OnSubmit handler
   const onSubmit = (data: FormData) => {
     // Ensure item_date is defined and has purchase_date and expiry_date properties
