@@ -5,13 +5,9 @@ import SupplierTable from "helpers/components/inventory-module/formmethods/view/
 import { useAppDispatch, useAppSelector } from "helpers/hooks/useStoreHooks";
 import { useEffect, useMemo } from "react";
 import {
-  setReorderViewData,
-  setReorderViewTrue,
-  setReorderProductId,
-  setTrackOrderTrue,
-  setTrackProductId,
-  setTrackProductData,
   GetAllSupplierThunk,
+  setEditItemId,
+  setSupplierEditTrue,
 } from "redux-app/inventory-module/InventorySlice";
 import { RootState } from "redux-app/store";
 import AddSupplierDetails from "helpers/components/inventory-module/formmethods/add/AddSupplierDetails";
@@ -33,15 +29,16 @@ const SupplierPage = () => {
 
   const getRoutes = (item: any) => ({
     handleViewAction: () => {
-      dispatch(setReorderViewData(item));
-      dispatch(setReorderViewTrue(true));
-      dispatch(setReorderProductId(item.id));
+      // dispatch(setReorderViewData(item));
+      // dispatch(setReorderViewTrue(true));
+      // dispatch(setReorderProductId(item.id));
     },
     handleDeleteAction: () => {},
     handleEditAction: () => {
-      dispatch(setTrackOrderTrue(true));
-      dispatch(setTrackProductId(item.id));
-      dispatch(setTrackProductData(item));
+      dispatch(setEditItemId(item));
+      dispatch(setSupplierEditTrue(true));
+      // dispatch(setTrackProductId(item.id));
+      // dispatch(setTrackProductData(item));
     },
   });
   const datas = details?.map((item: any) => ({

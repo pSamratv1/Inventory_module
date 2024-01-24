@@ -389,6 +389,12 @@ export const InventorySlice = createSlice({
     setSupplierAddTrue: (state, action) => {
       state.inventory.supplier.add.isFlag = action.payload;
     },
+    setEditSupplierId: (state, action) => {
+      state.platform.supplier._edit_SupplierForm.id = action.payload;
+    },
+    setSupplierEditTrue: (state, action) => {
+      state.inventory.supplier.edit.isFlag = action.payload;
+    },
     // Scanner
     setScannerCameraOpen: (state, action) => {
       state.platform.scanner.isFlag = action.payload;
@@ -548,7 +554,8 @@ export const {
 
   // Supplier
   setSupplierAddTrue,
-
+  setSupplierEditTrue,
+  setEditSupplierId,
   // Scanner
   setScannerCameraOpen,
   setScannerValue,
