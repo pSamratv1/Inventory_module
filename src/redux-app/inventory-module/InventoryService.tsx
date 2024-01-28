@@ -28,7 +28,9 @@ export const CreateInventoryServices = async (formData: any) => {
 };
 
 export const EditInventoryServices = async ({ formData, id }: any) => {
-  const URL = `${import.meta.env.VITE_INVENTORY_API_URL}${1}/item-add/${id}/`;
+  const URL = `${
+    import.meta.env.VITE_INVENTORY_API_URL
+  }${1}/item-detail/${id}/`;
 
   try {
     // either put or patch

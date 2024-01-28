@@ -40,7 +40,6 @@ export default function ReorderViewForm() {
 
   // OnSubmit handler
   const onSubmit = (data: FormData) => {
-    // Ensure item_date is defined and has purchase_date and expiry_date properties
     console.log(data, "formData Data");
     // // Extract purchase_date and expiry_date from data
     // const {

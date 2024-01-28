@@ -51,7 +51,7 @@ const ItemPage = () => {
   const data: Data =
     useAppSelector(
       (state: RootState) =>
-        state.Inventory.inventory.item.view.response.details["data "]
+        state.Inventory.inventory.item.view.response.details.data
     ) || [];
   // const data: Data[] = details.data;
   // console.log(details);

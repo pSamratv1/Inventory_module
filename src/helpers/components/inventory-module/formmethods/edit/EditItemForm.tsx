@@ -46,26 +46,24 @@ import dayjs from "dayjs";
 // import { transformOptionsInObj } from "utils/methods/stringMethods";
 const EditItemForm = () => {
   // useState for the short popup
-
   //  Redux Variable
   const dispatch = useAppDispatch();
   const { id } = useAppSelector(
     (state: RootState) => state.Inventory.platform.item._edit_ItemForm
   );
-  useEffect(() => {}, [id]);
   const { details } = useAppSelector(
     (state: RootState) => state.Inventory.inventory.item.view.response
   );
+
+  useEffect(() => {}, [id]);
 
   const { isFlag } = useAppSelector(
     (state: RootState) => state.Inventory.inventory.item.edit
   );
   const fetchItems = (id: any) => {
     // Check if items is defined before attempting to filter
-    if (details?.items) {
-      const filteredData = details?.items?.filter(
-        (item: any) => item.id === id
-      );
+    if (details?.data) {
+      const filteredData = details?.data?.filter((item: any) => item.id === id);
       return filteredData;
     } else {
       return [];
