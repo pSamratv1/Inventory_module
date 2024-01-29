@@ -37,3 +37,17 @@ export const transformOptionsInObj = (data: any, activeProductList: string) => {
 
 // Unique key for mapping
 export const getUniqueKey = (idx: number, value: string) => `${idx}. ${value}`;
+
+// Formatting date methods
+export const formatDate = (inputDate: string): string => {
+  const dateObject = new Date(inputDate);
+
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  };
+  const formattedDate: string = dateObject.toLocaleDateString("en-US", options);
+
+  return formattedDate;
+};

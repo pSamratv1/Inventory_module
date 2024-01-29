@@ -106,7 +106,7 @@ export const ViewItemTable = (props: CommonDesignSchema) => {
   // () => dispatch(setAddSupplierTrue(true))
   // Render the UI for your table
   return (
-    <div className="w-full h-full flex flex-col text-[13px] font-medium gap-2">
+    <div className="w-full h-full flex flex-col text-[14px] font-medium gap-2">
       <ControlBar {...controlbarProps} />
       {openCamera && <CameraComponent />}
       <Table {...tableProps} />

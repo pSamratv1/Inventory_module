@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Badge } from "../../helpers/components/common";
 import { defaultThCss, tableTdCss, tableThCss } from "../constants/table";
 
-import TrackInnerTable from "helpers/components/inventory-module/formmethods/view/TrackInnerTable";
+import InnerTrackTable from "helpers/components/inventory-module/formmethods/view/InnerTrackTable";
 
 export const ROLE_TABLE_MEMO = [
   {
@@ -214,7 +214,7 @@ export const RenderItemTableBody = ({ rows, prepareRow }: any) => {
             </tr>
             {clickedId === testId[testId.length - 1] && isFlag && (
               <div className="flex ml-7 my-2 bg-slate-200 w-[62.9rem] h-30  border-solid border-2 border-indigo-300 rounded-lg">
-                <TrackInnerTable />
+                <InnerTrackTable />
               </div>
             )}
           </React.Fragment>

@@ -23,7 +23,7 @@ const ReorderPage = () => {
   const data: Data =
     useAppSelector(
       (state: RootState) =>
-        state.Inventory.inventory.reorder.view.response.details["data "]
+        state.Inventory.inventory.reorder.view.response.details.data
     ) || [];
 
   // const { details } = useAppSelector(
