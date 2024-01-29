@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { GetAllInventoryServicesThunk } from "../../../../redux-app/inventory-module/InventorySlice";
+import {
+  GetAllInventoryServicesThunk,
+  GetAllTrackThunk,
+} from "../../../../redux-app/inventory-module/InventorySlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/useStoreHooks";
 import { RootState } from "../../../../redux-app/store";
 import { Sidebar } from "./Sidebar";
@@ -13,12 +16,19 @@ export default function CommonLayout() {
   const { isSuccess } = useAppSelector(
     (state: RootState) => state.Inventory.inventory.item.add.response
   );
-  const { data: trackData } = useFetchTrackData(1);
 
   // Fetch data when the component mounts
   useEffect(() => {
     dispatch(GetAllInventoryServicesThunk());
   }, [dispatch, isSuccess]);
+  // IsSuccess flag for the api fetching
+  const { isSuccess: isSuccess1 } = useAppSelector(
+    (state: RootState) => state.Inventory.inventory.track.view.response
+  );
+  // Fetch data when the component mounts
+  useEffect(() => {
+    dispatch(GetAllTrackThunk(1));
+  }, [dispatch, isSuccess1]);
 
   return (
     // Set the min width of the uoter most div to 25rem

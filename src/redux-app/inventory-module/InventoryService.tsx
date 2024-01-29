@@ -53,7 +53,9 @@ export const DeleteInventoryService = async (id: any) => {
 };
 // Inventory Re-Order Services (Create reoreder subscriptions)
 export const AddReOrderServices = async ({ updatedData, id }: any) => {
-  const URL = `${import.meta.env.VITE_INVENTORY_API_URL}${1}/item-add/${id}/`;
+  const URL = `${
+    import.meta.env.VITE_INVENTORY_API_URL
+  }${1}/item-detail/${id}/`;
 
   try {
     // either put or patch

@@ -44,10 +44,6 @@ export const TRACK_TABLE_MEMO = [
     hideHeader: false,
     columns: [
       {
-        Header: "",
-        accessor: "icons",
-      },
-      {
         Header: "ID",
         accessor: "id",
       },

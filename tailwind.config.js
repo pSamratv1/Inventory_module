@@ -9,6 +9,7 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
     "./node_modules/flowbite/**/*.js",
     "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
+    "node_modules/flowbite-react/lib/esm/**/*.js",
   ],
   theme: {
     // ...FONT_SIZES,
@@ -146,6 +147,6 @@ module.exports = {
       },
     },
   },
-  // plugins: [require("flowbite/plugin")],
-  plugins: [],
+  plugins: [require("flowbite/plugin")],
+  // plugins: [],
 };
