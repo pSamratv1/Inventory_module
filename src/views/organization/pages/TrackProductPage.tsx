@@ -56,7 +56,6 @@ const TrackProductPage = () => {
   const datas = details?.data
     ? details.data.map((item: any) => ({ ...item }))
     : [];
-  console.log(datas, "datas");
   const getRoutes = (id: number) => ({
     handleViewAction: () => {
       alert("handleViewAction");
@@ -70,12 +69,23 @@ const TrackProductPage = () => {
   });
 
   // if (datas && datas.items) {
-  //   datas.items.forEach((item: any) => {
-  //     item.actions = <TableActions {...getRoutes(item.id)} />;
-  //   });
+  //   datas.items.map((item: any) => r({
+  //     ...item,
+  //     actions: <TableActions {...getRoutes(item.id)} />,
+  //   }));
   // } else {
   //   console.error("Datas or datas.items is undefined or null.");
   // }
+
+  if (datas && datas.items) {
+    datas.items.map((item: any) => {
+      return {
+        ...item,
+        actions: <TableActions {...getRoutes(item.id)} />,
+      };
+    });
+  }
+  console.log(datas.items);
   const controlbarProps = {
     addCategoryBtnControlbar: {
       css: { customCss: addBtnControlbar },
