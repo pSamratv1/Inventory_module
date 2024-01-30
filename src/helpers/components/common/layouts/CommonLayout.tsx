@@ -8,7 +8,6 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../hooks/useStoreHooks";
 import { RootState } from "../../../../redux-app/store";
 import { Sidebar } from "./Sidebar";
-import { useFetchTrackData } from "helpers/hooks/useFetchTrackData";
 
 export default function CommonLayout() {
   const dispatch = useAppDispatch();

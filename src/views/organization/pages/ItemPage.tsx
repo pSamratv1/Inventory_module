@@ -12,7 +12,7 @@ import {
 import {
   setEditItemId,
   setEditItemTrue,
-  setReorderId,
+  setEditReorderId,
   setReorderAddTrue,
   setItemDeleteTrue,
   setDeleteItemId,
@@ -64,7 +64,7 @@ const ItemPage = () => {
   const columns = useMemo(() => INVENTORY_TABLE_MEMO, []);
   const getRoutes = (id: number) => ({
     handleViewAction: () => {
-      dispatch(setReorderId(id));
+      dispatch(setEditReorderId(id));
       dispatch(setReorderAddTrue(true));
     },
     handleEditAction: () => {

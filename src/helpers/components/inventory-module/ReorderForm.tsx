@@ -32,7 +32,7 @@ const ReorderForm = ({ formObj, form }: any) => {
       </div>
       <div className="grid grid-cols-12 sm:gap-4 ">
         <div className=" col-span-6  min-w-[160px] md:w-full sm:w-[14.5rem] justify-items-start ">
-          <TextInput {...formObj.item_reorder_date} />
+          <TextInput {...formObj.item_reorder_quantity} />
         </div>
         <div className=" col-span-6  w-[160px] md:w-full sm:w-full justify-items-start">
           <TextInput {...formObj.item_expiry_date} />

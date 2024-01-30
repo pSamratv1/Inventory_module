@@ -28,10 +28,7 @@ import {
 import CameraComponent from "helpers/components/common/scanners/BarCodeScanner";
 import { RootState } from "redux-app/store";
 import TableActions from "helpers/components/common/table/TableActions";
-import Table from "helpers/components/common/table/Table";
-import InnerTrackTable from "helpers/components/inventory-module/formmethods/view/InnerTrackTable";
-import { TRACK_TABLE_MEMO } from "helpers/components/common/table/TableConstants";
-import TrackTable from "helpers/components/inventory-module/formmethods/view/TrackTable";
+
 import { formatDate } from "utils/methods/stringMethods";
 
 // Create a custom hook using useQuery
@@ -43,8 +40,7 @@ const TrackProductPage = () => {
     useAppSelector(
       (state: RootState) => state.Inventory.inventory.track.view.response
     ) || [];
-
-  const column = useMemo(() => TRACK_TABLE_MEMO, []);
+  console.log(details);
   const [isEditFormOpen, setIsEditFormOpen] = useState(false);
   const [openCamera, setOpenCamera] = useState(false);
 

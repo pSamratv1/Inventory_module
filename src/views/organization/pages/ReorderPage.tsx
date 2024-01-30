@@ -29,7 +29,6 @@ const ReorderPage = () => {
   // const { details } = useAppSelector(
   //   (state) => state.Inventory.inventory.item.view.response
   // );
-  console.log(data, "data");
   // const { items } = details;
   const getRoutes = (item: any) => ({
     handleViewAction: () => {},
@@ -45,7 +44,6 @@ const ReorderPage = () => {
   const filteredArray = data.filter(
     (item: Data) => item.reorder_quantity !== null
   );
-  console.log(filteredArray, "filteredArray");
 
   const updatedData = filteredArray?.map((item: Data) => ({
     ...item,

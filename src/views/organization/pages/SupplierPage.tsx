@@ -28,11 +28,7 @@ const SupplierPage = () => {
   }, [dispatch, isSuccess]);
 
   const getRoutes = (item: any) => ({
-    handleViewAction: () => {
-      // dispatch(setReorderViewData(item));
-      // dispatch(setReorderViewTrue(true));
-      // dispatch(setReorderProductId(item.id));
-    },
+    handleViewAction: () => {},
     handleDeleteAction: () => {},
     handleEditAction: () => {
       dispatch(setEditItemId(item));

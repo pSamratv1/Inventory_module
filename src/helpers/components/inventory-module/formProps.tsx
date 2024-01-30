@@ -54,6 +54,18 @@ export const ReOrderFormValidation = () => {
 
   return validationSchema;
 };
+
+export const ReOrderEditFormValidation = () => {
+  const validationSchema = yup.object({
+    item_name: nameValidation,
+    item_on_hand: valueValidation,
+    item_reorder_quantity: valueValidation,
+    item_expiry_date: expiryDateValidation,
+  });
+
+  return validationSchema;
+};
+
 export const trackProductValidation = () => {
   const validationSchema = yup.object({
     item_name: valueValidation,
@@ -96,13 +108,12 @@ export const commonCss = {
     handleKeyDown: null,
     handleOnChange: null,
   };
-export const nameProps = ({ defaultValue, handleOnChange }: any) => ({
+export const nameProps = ({ defaultValue }: any) => ({
   input: "item_name",
   label: "Item Name",
   placeholder: "Enter Item Name",
   showImportant: true,
   defaultValue: defaultValue ?? "",
-  onchange: handleOnChange,
 });
 
 export const supplierItemProps = ({ defaultValue }: any) => ({
@@ -189,13 +200,12 @@ export const categoryProps = ({ defaultValue, handleOnChange }: any) => ({
   defaultValue: defaultValue ?? "",
   onchange: handleOnChange,
 });
-export const itemOnHandProps = ({ defaultValue, handleOnChange }: any) => ({
+export const itemOnHandProps = ({ defaultValue }: any) => ({
   input: "item_on_hand",
   label: "On Hand ",
   placeholder: "Enter Quantity",
   showImportant: true,
   defaultValue: defaultValue ?? "",
-  onchange: handleOnChange,
 });
 
 export const subCategoryProps = ({ defaultValue, handleOnChange }: any) => ({
@@ -254,6 +264,14 @@ export const reOrderDateProps = ({ defaultValue, handleOnChange }: any) => ({
   defaultValue: defaultValue ?? "",
   onchange: handleOnChange,
 });
+export const reOrderQuantityProps = ({ defaultValue }: any) => ({
+  input: "item_reorder_quantity",
+  label: "Reorder Quantity",
+  placeholder: "Enter Reorder Quantity",
+  showImportant: true,
+  defaultValue: defaultValue ?? "",
+});
+
 export const expiryDateProps = ({ defaultValue, handleOnChange }: any) => ({
   input: "expiry_date",
   label: "Expiry Date",
@@ -262,13 +280,12 @@ export const expiryDateProps = ({ defaultValue, handleOnChange }: any) => ({
   defaultValue: defaultValue ?? "",
   onchange: handleOnChange,
 });
-export const itemExpiryDateProps = ({ defaultValue, handleOnChange }: any) => ({
+export const itemExpiryDateProps = ({ defaultValue }: any) => ({
   input: "item_expiry_date",
   label: "Expiry Date",
   placeholder: "Expiry Date",
   showImportant: true,
   defaultValue: defaultValue ?? "",
-  onchange: handleOnChange,
 });
 
 export const recievedbyProps = ({ defaultValue }: any) => ({

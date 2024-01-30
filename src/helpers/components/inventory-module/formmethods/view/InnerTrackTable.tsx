@@ -4,7 +4,7 @@ import TableActions from "helpers/components/common/table/TableActions";
 import { useAppDispatch } from "helpers/hooks/useStoreHooks";
 
 import {
-  setReorderId,
+  setEditReorderId,
   setReorderAddTrue,
   setEditItemId,
   setEditItemTrue,
@@ -17,7 +17,7 @@ const InnerTrackTable = () => {
 
   const getRoutes = (id: number) => ({
     handleViewAction: () => {
-      dispatch(setReorderId(id));
+      dispatch(setEditReorderId(id));
       dispatch(setReorderAddTrue(true));
     },
     handleEditAction: () => {

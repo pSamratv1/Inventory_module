@@ -354,11 +354,14 @@ export const InventorySlice = createSlice({
     },
 
     // Reorder Reducers
-    setReorderId: (state, action) => {
-      state.platform.reorder._add_ReorderForm.id = action.payload;
+    setEditReorderId: (state, action) => {
+      state.platform.reorder._edit_ReorderForm.id = action.payload;
     },
     setReorderAddTrue: (state, action) => {
       state.inventory.reorder.add.isFlag = action.payload;
+    },
+    setReorderEditData: (state, action) => {
+      state.platform.reorder._edit_ReorderForm.details = action.payload;
     },
     setReorderViewTrue: (state, action) => {
       state.inventory.reorder.view.isFlag = action.payload;
@@ -538,7 +541,8 @@ export const {
   setDeleteItemId,
 
   // Reorder CRUD
-  setReorderId,
+  setEditReorderId,
+  setReorderEditData,
   setReorderProductId,
   setReorderViewData,
   setReorderAddTrue,
