@@ -42,7 +42,7 @@ const iconActions = ({
 
 export default function TableActions(props: TableActionsSchema) {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 ">
       {iconActions({ ...props }).map((item: any, idx: number) => (
         <IconButton key={`${idx}. TableAction IconButton`} {...item} />
       ))}

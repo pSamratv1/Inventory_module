@@ -56,10 +56,8 @@ const TrackProductPage = () => {
   const datas = details?.data
     ? details.data.map((item: any) => ({ ...item }))
     : [];
-  const getRoutes = (id: number) => ({
-    handleViewAction: () => {
-      alert("handleViewAction");
-    },
+  const getRoutes = () => ({
+    handleViewAction: () => {},
     handleEditAction: () => {
       alert("handleViewAction");
     },
@@ -77,15 +75,19 @@ const TrackProductPage = () => {
   //   console.error("Datas or datas.items is undefined or null.");
   // }
 
-  if (datas && datas.items) {
-    datas.items.map((item: any) => {
-      return {
+  // Loop through each object in the array
+  // Adding 'actions' key to each item in the 'items' array
+  const newData = datas.map((obj: any) => {
+    return {
+      ...obj,
+      items: obj.items.map((item: any) => ({
         ...item,
-        actions: <TableActions {...getRoutes(item.id)} />,
-      };
-    });
-  }
-  console.log(datas.items);
+        actions: <TableActions {...getRoutes()} />,
+      })),
+    };
+  });
+  console.log(newData, "newData");
+
   const controlbarProps = {
     addCategoryBtnControlbar: {
       css: { customCss: addBtnControlbar },
@@ -144,7 +146,7 @@ const TrackProductPage = () => {
           onClick={() => setIsEditFormOpen(true)}
         >
           <Accordion className=" text-[14px] text-#fffff">
-            {datas.map((item: any, idx: number) => (
+            {newData.map((item: any, idx: number) => (
               <AccordionItem key={idx} className="py-3">
                 <AccordionItemButton>
                   <span className="grid grid-cols-12 justify-between items-center px-2 w-full h-12  font-medium rtl:text-right border  border-gray-200 rounded-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 ">
@@ -199,7 +201,7 @@ const TrackProductPage = () => {
                             </div>
                           </td>
 
-                          <td className="h-[4rem] w-[] justify-center items-center gap-2 px-2 text-[13px] font-medium">
+                          <td className="h-[4rem] w-[2rem] justify-center items-center gap-2 px-16 text-[13px] font-medium">
                             {item.actions}
                           </td>
                         </tr>
