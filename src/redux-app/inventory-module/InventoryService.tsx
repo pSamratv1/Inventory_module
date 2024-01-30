@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const GetAllInventoryServices = async () => {
   try {
-    const URL = `${import.meta.env.VITE_INVENTORY_API_URL}${1}/item-add/`;
+    const URL = `${import.meta.env.VITE_INVENTORY_API_URL}${1}/items/`;
     const { data } = await axios.get(URL!);
 
     return data;
@@ -17,7 +17,7 @@ export const GetAllInventoryServices = async () => {
 export const CreateInventoryServices = async (formData: any) => {
   try {
     // const URL = import.meta.env.VITE_ORGANIZATION_API_URL;
-    const URL = `${import.meta.env.VITE_INVENTORY_API_URL}${1}/item-add/`;
+    const URL = `${import.meta.env.VITE_INVENTORY_API_URL}${1}/item-detail/`;
 
     const { data } = await axios.post(URL!, { ...formData });
 
@@ -40,12 +40,17 @@ export const EditInventoryServices = async ({ formData, id }: any) => {
     console.log("EditInventoryServices failed. Please try again later.", e);
   }
 };
-export const DeleteInventoryService = async (id: any) => {
-  const URL = `${import.meta.env.VITE_INVENTORY_API_URL}${1}/item-add/${id}/`;
+
+// Item Delete Services
+export const DeleteInventoryServices = async (id: any) => {
+  const URL = `${
+    import.meta.env.VITE_INVENTORY_API_URL
+  }${1}/item-detail/${id}/`;
 
   try {
     // either put or patch
     const { data } = await axios.delete(URL);
+    console.log(data, "data");
     return data;
   } catch (e: any) {
     console.log("DeleteInventoryService failed. Please try again later.", e);

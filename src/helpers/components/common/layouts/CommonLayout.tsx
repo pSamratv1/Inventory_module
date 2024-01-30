@@ -22,13 +22,18 @@ export default function CommonLayout() {
     dispatch(GetAllInventoryServicesThunk());
   }, [dispatch, isSuccess]);
   // IsSuccess flag for the api fetching
-  const { isSuccess: isSuccess1 } = useAppSelector(
+  const { isSuccess: trackViewSuccess } = useAppSelector(
     (state: RootState) => state.Inventory.inventory.track.view.response
+  );
+  // IsSuccess flag for the api fetching
+  const { isSuccess: deleteIsSuccess } = useAppSelector(
+    (state: RootState) => state.Inventory.inventory.item.delete.response
   );
   // Fetch data when the component mounts
   useEffect(() => {
     dispatch(GetAllTrackThunk(1));
-  }, [dispatch, isSuccess1]);
+    dispatch(GetAllInventoryServicesThunk());
+  }, [dispatch, trackViewSuccess, deleteIsSuccess]);
 
   return (
     // Set the min width of the uoter most div to 25rem

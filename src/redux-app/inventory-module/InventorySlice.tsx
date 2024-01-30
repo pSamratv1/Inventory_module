@@ -8,13 +8,12 @@ import {
   AddReOrderServices,
   CreateInventoryServices,
   CreateSuppierServices,
-  DeleteInventoryService,
+  DeleteInventoryServices,
   EditInventoryServices,
   GetAllInventoryServices,
   GetAllSupplierServices,
   GetAllTrackServices,
 } from "./InventoryService";
-import { useAppSelector } from "../../helpers/hooks/useStoreHooks";
 
 export const initialState: ItemSliceSchema = {
   // Platform
@@ -241,22 +240,20 @@ export const EditInventoryThunk = createAsyncThunk(
     }
   }
 );
+
+// Delete Inventory Service
 export const DeleteInventoryThunk = createAsyncThunk(
   "DeleteInventoryThunk",
-  async ({ id }: any, thunkAPI) => {
-    const { formData } = useAppSelector(
-      (state) => state.Inventory.inventory.item.delete.response
-    );
+  async (id: any, thunkAPI) => {
     try {
-      console.log(formData, id, "formdDataaaaaaaa");
-      return await DeleteInventoryService({ formData, id });
+      return await DeleteInventoryServices(id);
     } catch (error: any) {
       return thunkAPI.rejectWithValue(getReduxErrorMsg(error));
     }
   }
 );
 
-// Add Inentory Service
+// Add Re-order Service
 export const AddReOrderThunk = createAsyncThunk(
   "AddReOrderThunk",
   async ({ updatedData, id }: any, thunkAPI) => {
