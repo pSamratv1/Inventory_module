@@ -21,6 +21,7 @@ import {
 } from "../../../../hooks/useStoreHooks";
 import { setReorderViewTrue } from "../../../../../redux-app/inventory-module/InventorySlice";
 import { RootState } from "../../../../../redux-app/store";
+import { useEffect, useState } from "react";
 
 interface FormData {
   item_name: string;
@@ -36,6 +37,7 @@ interface FormData {
 // import { transformOptionsInObj } from "utils/methods/stringMethods";
 const ReorderEditForm = ({ id }: any) => {
   // UseState
+  const [formObj, setFormObj] = useState({});
   // Redux variables
   const dispatch = useAppDispatch();
   const { isFlag } = useAppSelector(
@@ -47,7 +49,7 @@ const ReorderEditForm = ({ id }: any) => {
 
   // Fetch The data from the details
   const fetchItems = (id: any) => {
-    const filteredData = details?.data?.filter((item: any) => item.id === id);
+    const filteredData = details?.data?.find((item: any) => item.id === id);
     return filteredData;
   };
 
@@ -108,31 +110,38 @@ const ReorderEditForm = ({ id }: any) => {
 
   // Fetch items from the response details (using redux / api)
   const editDataArray = fetchItems(id);
-  console.log(editDataArray, "editDataArray");
+  console.log(editDataArray?.id, "editDataArray");
   // Getting the default value from the editDataArray
 
-  const editFormObj = {
-    item_name: {
-      common: nameProps({ defaultValue: editDataArray.item_name }),
-      ...remaining,
-    },
-    item_on_hand: {
-      common: itemOnHandProps({ defaultValue: editDataArray[0].quantity }),
-      ...remaining,
-    },
-    item_reorder_quantity: {
-      common: reOrderQuantityProps({
-        defaultValue: editDataArray[0].reorder_quantity,
-      }),
-      ...remaining,
-    },
-    item_expiry_date: {
-      common: itemExpiryDateProps({
-        defaultValue: editDataArray[0].expiry_date,
-      }),
-      ...remaining,
-    },
-  };
+  useEffect(() => {
+    const formObj = {
+      item_name: {
+        common: nameProps({
+          defaultValue: editDataArray && editDataArray.item_name,
+        }),
+        ...remaining,
+      },
+      item_on_hand: {
+        common: itemOnHandProps({
+          defaultValue: editDataArray && editDataArray.quantity,
+        }),
+        ...remaining,
+      },
+      item_reorder_quantity: {
+        common: reOrderQuantityProps({
+          defaultValue: editDataArray && editDataArray.reorder_quantity,
+        }),
+        ...remaining,
+      },
+      item_expiry_date: {
+        common: itemExpiryDateProps({
+          defaultValue: editDataArray && editDataArray.expiry_date,
+        }),
+        ...remaining,
+      },
+    };
+    setFormObj(formObj);
+  }, [editDataArray?.id]);
 
   return (
     <>
@@ -147,7 +156,7 @@ const ReorderEditForm = ({ id }: any) => {
             <p className="text-base text-primary-medium font-medium text-blue">
               Edit Reorder
             </p>
-            <ReorderForm formObj={editFormObj} form={form} />
+            <ReorderForm formObj={formObj} form={form} />
           </div>
           <CloseIconButton
             css={{}}

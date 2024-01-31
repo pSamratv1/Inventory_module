@@ -66,7 +66,7 @@ const ReorderPage = () => {
 
   return (
     <>
-      <ReorderViewForm id={70} />
+      <ReorderViewForm id={id} />
       <ReorderTable {...ReorderTableProps} />
     </>
   );

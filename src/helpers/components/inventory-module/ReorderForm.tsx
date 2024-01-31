@@ -5,7 +5,7 @@ import { addItemBtnProps } from "./formProps";
 
 const ReorderForm = ({ formObj, form }: any) => {
   // Props
-
+  console.log(formObj, "formObj");
   // Destucuring Props
   const { handleSubmit, onSubmit } = form;
 
