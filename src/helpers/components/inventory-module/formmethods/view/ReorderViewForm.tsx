@@ -110,38 +110,40 @@ const ReorderEditForm = ({ id }: any) => {
 
   // Fetch items from the response details (using redux / api)
   const editDataArray = fetchItems(id);
-  console.log(editDataArray?.id, "editDataArray");
   // Getting the default value from the editDataArray
-
+  console.log(editDataArray);
+  // useEffect to set up formObj when editDataArray changes
   useEffect(() => {
-    const formObj = {
-      item_name: {
-        common: nameProps({
-          defaultValue: editDataArray && editDataArray.item_name,
-        }),
-        ...remaining,
-      },
-      item_on_hand: {
-        common: itemOnHandProps({
-          defaultValue: editDataArray && editDataArray.quantity,
-        }),
-        ...remaining,
-      },
-      item_reorder_quantity: {
-        common: reOrderQuantityProps({
-          defaultValue: editDataArray && editDataArray.reorder_quantity,
-        }),
-        ...remaining,
-      },
-      item_expiry_date: {
-        common: itemExpiryDateProps({
-          defaultValue: editDataArray && editDataArray.expiry_date,
-        }),
-        ...remaining,
-      },
-    };
-    setFormObj(formObj);
-  }, [editDataArray?.id]);
+    if (editDataArray) {
+      const formObj = {
+        item_name: {
+          common: nameProps({
+            defaultValue: editDataArray.item_name,
+          }),
+          ...remaining,
+        },
+        item_on_hand: {
+          common: itemOnHandProps({
+            defaultValue: editDataArray.quantity,
+          }),
+          ...remaining,
+        },
+        item_reorder_quantity: {
+          common: reOrderQuantityProps({
+            defaultValue: editDataArray.reorder_quantity,
+          }),
+          ...remaining,
+        },
+        item_expiry_date: {
+          common: itemExpiryDateProps({
+            defaultValue: editDataArray.expiry_date,
+          }),
+          ...remaining,
+        },
+      };
+      setFormObj(formObj);
+    }
+  }, [editDataArray]);
 
   return (
     <>
