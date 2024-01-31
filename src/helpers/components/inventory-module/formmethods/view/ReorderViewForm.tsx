@@ -21,7 +21,6 @@ import {
 } from "../../../../hooks/useStoreHooks";
 import { setReorderViewTrue } from "../../../../../redux-app/inventory-module/InventorySlice";
 import { RootState } from "../../../../../redux-app/store";
-import { useEffect } from "react";
 
 interface FormData {
   item_name: string;
@@ -35,7 +34,7 @@ interface FormData {
   supplier_name: string;
 }
 // import { transformOptionsInObj } from "utils/methods/stringMethods";
-const ReorderEditForm = () => {
+const ReorderEditForm = ({ id }: any) => {
   // UseState
   // Redux variables
   const dispatch = useAppDispatch();
@@ -46,32 +45,11 @@ const ReorderEditForm = () => {
     (state: RootState) => state.Inventory.inventory.reorder.view.response
   );
 
-  const { id } = useAppSelector(
-    (state: RootState) => state.Inventory.platform.reorder._edit_ReorderForm
-  );
-  useEffect(() => {}, [id]);
-
   // Fetch The data from the details
   const fetchItems = (id: any) => {
-    // Check if items is defined before attempting to filter
-    if (details?.data) {
-      const filteredData = details?.data?.filter((item: any) => item.id === id);
-      console.log(filteredData, "filteredDatas");
-      return filteredData;
-    } else {
-      return [];
-    }
+    const filteredData = details?.data?.filter((item: any) => item.id === id);
+    return filteredData;
   };
-
-  // Fetch items from the response details (using redux / api)
-  const editDataArray = fetchItems(id);
-  // Getting the default value from the editDataArray
-  const itemName = editDataArray.length > 0 ? editDataArray[0].item_name : "";
-  const itemOnHand = editDataArray.length > 0 ? editDataArray[0].quantity : "";
-  const itemReorderQuantity =
-    editDataArray.length > 0 ? editDataArray[0].reorder_quantity : "";
-  const itemExpiryDate =
-    editDataArray.length > 0 ? editDataArray[0].expiry_date : "";
 
   // OnSubmit handler
   const onSubmit = (data: FormData) => {
@@ -128,33 +106,34 @@ const ReorderEditForm = () => {
   };
   const remaining = { actions: commonActions, form, css: {} };
 
-  // Form Object for edit
-  const formObj = {
+  // Fetch items from the response details (using redux / api)
+  const editDataArray = fetchItems(id);
+  console.log(editDataArray, "editDataArray");
+  // Getting the default value from the editDataArray
+
+  const editFormObj = {
     item_name: {
-      common: nameProps({ defaultValue: itemName }),
+      common: nameProps({ defaultValue: editDataArray.item_name }),
       ...remaining,
     },
     item_on_hand: {
-      common: itemOnHandProps({
-        defaultValue: itemOnHand,
-      }),
+      common: itemOnHandProps({ defaultValue: editDataArray[0].quantity }),
       ...remaining,
     },
     item_reorder_quantity: {
       common: reOrderQuantityProps({
-        defaultValue: itemReorderQuantity,
+        defaultValue: editDataArray[0].reorder_quantity,
       }),
       ...remaining,
     },
     item_expiry_date: {
       common: itemExpiryDateProps({
-        defaultValue: itemExpiryDate,
+        defaultValue: editDataArray[0].expiry_date,
       }),
       ...remaining,
     },
   };
 
-  useEffect(() => {});
   return (
     <>
       {isFlag && (
@@ -168,7 +147,7 @@ const ReorderEditForm = () => {
             <p className="text-base text-primary-medium font-medium text-blue">
               Edit Reorder
             </p>
-            <ReorderForm formObj={formObj} form={form} />
+            <ReorderForm formObj={editFormObj} form={form} />
           </div>
           <CloseIconButton
             css={{}}

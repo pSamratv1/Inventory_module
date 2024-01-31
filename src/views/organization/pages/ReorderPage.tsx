@@ -18,7 +18,13 @@ import { RootState } from "redux-app/store";
 import { Data } from "./ItemPage";
 
 const ReorderPage = () => {
+  // UseState
+  // Redux variables
   const dispatch = useAppDispatch();
+
+  const { id } = useAppSelector(
+    (state: RootState) => state.Inventory.platform.reorder._edit_ReorderForm
+  );
   const columns = useMemo(() => REORDER_PRODUCT_TABLE_MEMO, []);
   const data: Data =
     useAppSelector(
@@ -60,7 +66,7 @@ const ReorderPage = () => {
 
   return (
     <>
-      <ReorderViewForm />
+      <ReorderViewForm id={70} />
       <ReorderTable {...ReorderTableProps} />
     </>
   );
