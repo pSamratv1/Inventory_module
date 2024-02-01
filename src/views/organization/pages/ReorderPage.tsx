@@ -25,6 +25,7 @@ const ReorderPage = () => {
   const { id } = useAppSelector(
     (state: RootState) => state.Inventory.platform.reorder._edit_ReorderForm
   );
+
   const columns = useMemo(() => REORDER_PRODUCT_TABLE_MEMO, []);
   const data: Data =
     useAppSelector(

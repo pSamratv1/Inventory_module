@@ -5,12 +5,14 @@ import { addItemBtnProps } from "./formProps";
 
 const ReorderForm = ({ formObj, form }: any) => {
   // Props
-  console.log({ ...formObj.item_reorder_quantity }, "formObj");
   // Destucuring Props
   const { handleSubmit, onSubmit } = form;
-
+  console.log(formObj, "formObj");
   // Redux
-
+  if (Object.keys(formObj).length === 0) {
+    // Render a loading state or return null
+    return null;
+  }
   // Redux variables
 
   // Validation
