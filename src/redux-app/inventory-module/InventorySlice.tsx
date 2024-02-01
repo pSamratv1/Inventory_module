@@ -414,7 +414,6 @@ export const InventorySlice = createSlice({
       })
       .addCase(GetAllInventoryServicesThunk.fulfilled, (state, action) => {
         state.inventory.item.view.response.isLoading = false;
-
         state.inventory.item.view.response.isSuccess = true;
         state.inventory.item.view.response.details = action.payload;
         state.inventory.reorder.view.response.details = action.payload;

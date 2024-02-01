@@ -44,4 +44,4 @@ export default function CardPopup(props: any) {
       )}
     </div>
   );
-} 
+}

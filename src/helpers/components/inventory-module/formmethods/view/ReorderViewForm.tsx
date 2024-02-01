@@ -35,7 +35,7 @@ interface FormData {
   supplier_name: string;
 }
 // import { transformOptionsInObj } from "utils/methods/stringMethods";
-const ReorderEditForm = ({ id }: any) => {
+const ReorderViewForm = ({ id }: any) => {
   // UseState
   const [formObj, setFormObj] = useState({});
   // Redux variables
@@ -49,6 +49,8 @@ const ReorderEditForm = ({ id }: any) => {
 
   // Fetch The data from the details
   const fetchItems = (id: any) => {
+    // Check if items is defined before attempting to filter
+
     const filteredData = details?.data?.find((item: any) => item.id === id);
     return filteredData;
   };
@@ -111,7 +113,7 @@ const ReorderEditForm = ({ id }: any) => {
   // Fetch items from the response details (using redux / api)
   const editDataArray = fetchItems(id);
   // Getting the default value from the editDataArray
-  console.log(editDataArray);
+
   // useEffect to set up formObj when editDataArray changes
   useEffect(() => {
     if (editDataArray) {
@@ -158,7 +160,7 @@ const ReorderEditForm = ({ id }: any) => {
             <p className="text-base text-primary-medium font-medium text-blue">
               Edit Reorder
             </p>
-            <ReorderForm formObj={formObj} form={form} />
+            <ReorderForm form={form} formObj={formObj} />
           </div>
           <CloseIconButton
             css={{}}
@@ -172,4 +174,4 @@ const ReorderEditForm = ({ id }: any) => {
     </>
   );
 };
-export default ReorderEditForm;
+export default ReorderViewForm;

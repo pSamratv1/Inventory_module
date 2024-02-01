@@ -14,7 +14,7 @@ import {
   // setTrackProductData,
   // setTrackProductId,
 } from "../../../redux-app/inventory-module/InventorySlice";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { addBtnControlbar } from "utils/methods/css";
 
 import { BiBarcodeReader } from "react-icons/bi";

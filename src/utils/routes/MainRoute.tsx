@@ -2,7 +2,7 @@ import { CommonLayout } from "../../helpers/components/common";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ErrorPage404 } from "../../views";
 // import ItemPage from "../../views/organization/pages/ItemPage";
-import * as Pages from "views/organization/pages";
+import * as Pages from "views/organization/pages/index";
 
 export default function MainRoute() {
   return (
