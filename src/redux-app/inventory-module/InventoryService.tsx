@@ -17,7 +17,7 @@ export const GetAllInventoryServices = async () => {
 export const CreateInventoryServices = async (formData: any) => {
   try {
     // const URL = import.meta.env.VITE_ORGANIZATION_API_URL;
-    const URL = `${import.meta.env.VITE_INVENTORY_API_URL}${1}/item-detail/`;
+    const URL = `${import.meta.env.VITE_INVENTORY_API_URL}${1}/items/`;
 
     const { data } = await axios.post(URL!, { ...formData });
 
@@ -28,9 +28,7 @@ export const CreateInventoryServices = async (formData: any) => {
 };
 
 export const EditInventoryServices = async ({ formData, id }: any) => {
-  const URL = `${
-    import.meta.env.VITE_INVENTORY_API_URL
-  }${1}/item-detail/${id}/`;
+  const URL = `${import.meta.env.VITE_INVENTORY_API_URL}${1}/items/${id}/`;
 
   try {
     // either put or patch

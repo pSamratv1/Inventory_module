@@ -3,7 +3,7 @@
 import { Button, TextInput } from "../common";
 import { addItemBtnProps } from "./formProps";
 
-const ReorderForm = ({ formObj, form }: any) => {
+const ReorderEditForm = ({ formObj, form }: any) => {
   // Props
   // Destucuring Props
   const { handleSubmit, onSubmit } = form;
@@ -48,4 +48,4 @@ const ReorderForm = ({ formObj, form }: any) => {
   );
 };
 
-export default ReorderForm;
+export default ReorderEditForm;

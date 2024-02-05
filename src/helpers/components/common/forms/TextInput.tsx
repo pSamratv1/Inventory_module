@@ -20,7 +20,6 @@ export default function TextInput(props: InputSchema) {
   const { divCss, labelCss, inputCss, errorCss } = css || {};
   // Values
   const errorMsg = getFormErrorMsg(errors, input);
-
   // Css
   const highlightBorder =
     "border focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500";

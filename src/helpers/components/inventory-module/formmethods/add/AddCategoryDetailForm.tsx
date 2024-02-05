@@ -21,7 +21,10 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "../../../../hooks/useStoreHooks";
-import { setAddCategoryDetailsTrue } from "../../../../../redux-app/inventory-module/InventorySlice";
+import {
+  setAddCategoryDetailsTrue,
+  setAddCategoryDynamicAttr,
+} from "../../../../../redux-app/inventory-module/InventorySlice";
 import { RootState } from "../../../../../redux-app/store";
 
 interface FormCateoryDetail {
@@ -29,7 +32,6 @@ interface FormCateoryDetail {
   label_unit: string;
 }
 export interface FormCateoryDetailData {
-  category_label_id: number;
   category_label: string;
   label_unit: string;
 }
@@ -49,15 +51,15 @@ export default function AddCategoryDetailForm() {
 
   const onDetailSubmit: SubmitHandler<FormCateoryDetail> = (data) => {
     const newDetail: FormCateoryDetailData = {
-      category_label_id: counter,
       category_label: data.category_detail,
       label_unit: data.label_unit,
     };
-
+    console.log(newDetail);
     const newUpdatedData = [...updatedData, newDetail];
     setUpdatedData(newUpdatedData);
     setCounter(counter + 1);
     dispatch(setAddCategoryDetailsTrue(false));
+    dispatch(setAddCategoryDynamicAttr(newUpdatedData));
     // Move the state updates inside a useEffect hook
 
     // Form reset
@@ -71,7 +73,6 @@ export default function AddCategoryDetailForm() {
 
   // validation
   const validationSchema: any = AddCategoryDetailFormValidation();
-
   // react-hook-form for the first form
   const {
     register,
@@ -113,6 +114,8 @@ export default function AddCategoryDetailForm() {
         { label: "Pcs", value: "Pieces" },
         { label: "Mt", value: "Meter" },
         { label: "Cm", value: "Centimeter" },
+        { label: "Gb", value: "Gigabyte" },
+        { label: "Mb", value: "Megabyte" },
       ],
       ...remaining,
     },

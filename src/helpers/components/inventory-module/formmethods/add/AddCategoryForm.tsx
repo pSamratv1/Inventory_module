@@ -12,6 +12,7 @@ import {
   AddCategoryFormValidation,
   addCatgeoryBtnProps,
   addCatgeoryDetailsBtnProps,
+  categoryDetailsProps,
   categoryProps,
   commonActions,
   subCategoryProps,
@@ -76,8 +77,8 @@ export default function AddCategoryForm() {
 
   // Form Object for add
   const formObj: any = {
-    item_category: {
-      common: categoryProps({}),
+    parent_item_category: {
+      common: categoryDetailsProps({}),
       ...remaining,
     },
     item_subCategory: {
@@ -98,7 +99,6 @@ export default function AddCategoryForm() {
   // UseEffect Hooks
 
   const handleDetailPopup = () => {
-    alert("clicked on the DetailPopUp Button");
     dispatch(setAddCategoryDetailsTrue(true));
   };
 
@@ -125,7 +125,7 @@ export default function AddCategoryForm() {
               >
                 <div className="grid grid-cols-12 gap-4">
                   <div className="col-span-6 min-w-[160px] justify-items-start">
-                    <TextInput {...formObj.item_category} />
+                    <TextInput {...formObj.parent_item_category} />
                   </div>
                   <div className="col-span-6  min-w-[160px] justify-items-start">
                     <TextInput {...formObj.item_subCategory} />
@@ -133,17 +133,19 @@ export default function AddCategoryForm() {
                 </div>
                 <div className="grid grid-cols-12 gap-4">
                   {dynamic_attr &&
-                    dynamic_attr.map((item: FormCateoryDetailData) => {
-                      return (
-                        <div
-                          className="col-span-6 min-w-[160px] justify-items-start"
-                          key={item.category_label_id}
-                        >
-                          {item && item.category_label && (
+                    dynamic_attr.map(
+                      (item: FormCateoryDetailData, idx: number) => {
+                        console.log(item, "jkafjbsd");
+                        return (
+                          <div
+                            className="col-span-6 min-w-[160px] justify-items-start"
+                            key={idx}
+                          >
                             <TextInput
                               common={{
-                                input: `${item.category_label_id}_input`,
+                                input: `${idx}_input`,
                                 label: item.category_label,
+                                placeholder: `Enter value in ${item.label_unit}`,
                               }}
                               actions={commonActions || {}}
                               css={{}}
@@ -152,10 +154,10 @@ export default function AddCategoryForm() {
                                 errors: form.errors,
                               }}
                             />
-                          )}
-                        </div>
-                      );
-                    })}
+                          </div>
+                        );
+                      }
+                    )}
                 </div>
 
                 <div className="flex mt-4 w-full justify-start">

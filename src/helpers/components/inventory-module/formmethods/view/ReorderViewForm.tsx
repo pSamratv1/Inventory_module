@@ -5,7 +5,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 // import dayjs from "dayjs";
 import { useForm } from "react-hook-form";
 import { CenterSection, CloseIconButton } from "../../../common";
-import ReorderForm from "../../ReorderForm";
 import {
   commonActions,
   nameProps,
@@ -22,6 +21,7 @@ import {
 import { setReorderViewTrue } from "../../../../../redux-app/inventory-module/InventorySlice";
 import { RootState } from "../../../../../redux-app/store";
 import { useEffect, useState } from "react";
+import ReorderEditForm from "../../ReorderEditForm";
 
 interface FormData {
   item_name: string;
@@ -160,7 +160,7 @@ const ReorderViewForm = ({ id }: any) => {
             <p className="text-base text-primary-medium font-medium text-blue">
               Edit Reorder
             </p>
-            <ReorderForm form={form} formObj={formObj} />
+            <ReorderEditForm form={form} formObj={formObj} />
           </div>
           <CloseIconButton
             css={{}}

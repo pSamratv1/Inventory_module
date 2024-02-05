@@ -47,7 +47,7 @@ export default function SelectInput(props: SelectInputSchema) {
         </label>
       )}
       <select
-        id={`${input}-select`}
+        id={`${input}`}
         {...register(input)}
         className={`${finalInputCss} ${border}` + "[&>*]:p-8 w-20"}
         type="text"

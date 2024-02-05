@@ -10,6 +10,7 @@ import {
   setAddItemTrue,
   setScannerCameraOpen,
   setSupplierAddTrue,
+  setTrackOrderTrue,
   // setTrackOrderTrue,
   // setTrackProductData,
   // setTrackProductId,
@@ -40,7 +41,6 @@ const TrackProductPage = () => {
     useAppSelector(
       (state: RootState) => state.Inventory.inventory.track.view.response
     ) || [];
-  console.log(details);
   const [isEditFormOpen, setIsEditFormOpen] = useState(false);
   const [openCamera, setOpenCamera] = useState(false);
 
@@ -55,7 +55,7 @@ const TrackProductPage = () => {
   const getRoutes = () => ({
     handleViewAction: () => {},
     handleEditAction: () => {
-      alert("handleViewAction");
+      dispatch(setTrackOrderTrue(true));
     },
     handleDeleteAction: () => {
       alert("handleDeleteAction");

@@ -28,10 +28,7 @@ const TrackTable = (props: TrackProductAccordionProps) => {
   // Use the state and functions returned from useTable to build your UI
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data }, useFilters, useSortBy);
-  console.log("Columns:", columns);
-  console.log("Data:", data);
-  console.log("Header Groups:", headerGroups);
-  console.log("Rows:", rows);
+
   // Actions
   const handleHeaderClick = (column: any) => {
     alert(column.Header);

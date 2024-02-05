@@ -33,20 +33,20 @@ const ItemForm = ({ formObj, form }: any) => {
       </div>
       <div className="grid grid-cols-12 sm:gap-4 ">
         <div className="grid grid-cols-12 col-span-6  min-w-[160px] md:w-full sm:w-[14.5rem] justify-items-start ">
-          <TextInput {...formObj.item_quantity.value} />
-          <SelectInput {...formObj.item_quantity.unit} />
+          <TextInput {...formObj.quantity} />
+          <SelectInput {...formObj.quantity_unit} />
         </div>
         <div className="grid grid-cols-12 col-span-6  w-[160px] md:w-full sm:w-full justify-items-start">
-          <TextInput {...formObj.item_price.value} />
-          <SelectInput {...formObj.item_price.unit} />
+          <TextInput {...formObj.price} />
+          <SelectInput {...formObj.price_unit} />
         </div>
       </div>
       <div className="grid grid-cols-12 sm:gap-4">
         <div className="col-span-6  min-w-[160px] justify-items-start">
-          <DateInput {...formObj.item_date.purchase_date} />
+          <DateInput {...formObj.purchase_date} />
         </div>
         <div className="col-span-6  min-w-[160px] justify-items-start">
-          <DateInput {...formObj.item_date.expiry_date} />
+          <DateInput {...formObj.expiry_date} />
         </div>
       </div>
       <div className="grid grid-cols-12 gap-4">

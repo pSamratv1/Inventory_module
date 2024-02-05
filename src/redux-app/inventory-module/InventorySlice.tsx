@@ -349,6 +349,10 @@ export const InventorySlice = createSlice({
     setAddCategoryDetailsTrue: (state, action) => {
       state.inventory.category.detail.add.isFlag = action.payload;
     },
+    setAddCategoryDynamicAttr: (state, action) => {
+      state.platform.category._add_CategoryForm.input.dynamic_attr =
+        action.payload;
+    },
     setAddCategoryTrue: (state, action) => {
       state.inventory.category.category.add.isFlag = action.payload;
     },
@@ -374,6 +378,7 @@ export const InventorySlice = createSlice({
     },
 
     // Track Reducers
+
     setTrackProductId: (state, action) => {
       state.platform.track._edit_TrackForm.id = action.payload;
     },
@@ -529,6 +534,7 @@ export const {
   setAddCategoryTrue,
   setAddCategoryName,
   setAddSubCategoryName,
+  setAddCategoryDynamicAttr,
 
   // Edit Item
   setEditItemTrue,

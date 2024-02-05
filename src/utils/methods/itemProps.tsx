@@ -153,12 +153,15 @@ export const RenderItemTableBody = ({ rows, prepareRow }: any) => {
   // renderBody,
 
   const handleRowClick = (e: any, id: number) => {
-    const result = e.target.parentElement.children;
-    const testId1 = Number(result[1].innerText);
+    const clickedElement = e.target.parentElement.children[1];
 
-    setClickedId(id);
-    setIsFlag(!isFlag);
-    setTestId([...testId, testId1]);
+    if (clickedElement) {
+      const testId1 = Number(clickedElement.innerText);
+
+      setClickedId(id);
+      setIsFlag(!isFlag);
+      setTestId([...testId, testId1]);
+    }
   };
 
   // useEffect

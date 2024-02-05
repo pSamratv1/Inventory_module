@@ -15,7 +15,7 @@ import * as yup from "yup";
 
 export const AddCategoryFormValidation = () => {
   const validationSchema = yup.object({
-    item_category: nameValidation,
+    parent_item_category: nameValidation,
     item_subCategory: nameValidation,
   });
   return validationSchema;
@@ -36,10 +36,10 @@ export const AddItemFormValidation = () => {
     expiry_date: expiryDateValidation,
 
     quantity_unit: selectValidation,
-    quantity_value: valueValidation,
+    quantity: valueValidation,
 
     price_unit: selectValidation,
-    price_value: valueValidation,
+    price: valueValidation,
     supplier_name: selectValidation,
   });
 
@@ -200,6 +200,16 @@ export const categoryProps = ({ defaultValue, handleOnChange }: any) => ({
   defaultValue: defaultValue ?? "",
   onchange: handleOnChange,
 });
+export const categoryDetailsProps = ({
+  defaultValue,
+  handleOnChange,
+}: any) => ({
+  input: "parent_item_category",
+  label: "Item Category ",
+  placeholder: "Enter Category",
+  defaultValue: defaultValue ?? "",
+  onchange: handleOnChange,
+});
 export const itemOnHandProps = ({ defaultValue }: any) => ({
   input: "item_on_hand",
   label: "On Hand ",
@@ -219,12 +229,13 @@ export const subCategoryProps = ({ defaultValue, handleOnChange }: any) => ({
 
 export const quantityUnitProps = ({ defaultValue, handleOnChange }: any) => ({
   input: "quantity_unit",
+  label: "Units",
   showImportant: true,
   defaultValue: defaultValue ?? "",
   onchange: handleOnChange,
 });
 export const quantityValueProps = ({ defaultValue, handleOnChange }: any) => ({
-  input: "quantity_value",
+  input: "quantity",
   label: "Item Quantity",
   placeholder: "Enter Quantity",
   showImportant: true,
@@ -234,13 +245,14 @@ export const quantityValueProps = ({ defaultValue, handleOnChange }: any) => ({
 
 export const priceUnitProps = ({ defaultValue, handleOnChange }: any) => ({
   input: "price_unit",
+  label: "Unit",
   showImportant: true,
   defaultValue: defaultValue ?? "",
   onchange: handleOnChange,
 });
 
 export const priceValueProps = ({ defaultValue, handleOnChange }: any) => ({
-  input: "price_value",
+  input: "price",
   label: "Item Price",
   placeholder: "Enter Price",
   showImportant: true,
@@ -349,8 +361,8 @@ export const statusProps = ({ defaultValue }: any) => ({
 });
 
 export const addItemBtnProps = {
-  onclick: () => console.log("clicked"),
   title: "Save",
+  type: "submit",
   css: {
     customCss:
       "w-[6rem] px-3 py-1.5 flex gap-1 justify-center items-center  bg-primary-dark text-white border-[1px] border-primary-medium font-medium text-[11px] rounded-sm",
